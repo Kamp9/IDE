@@ -1,0 +1,30 @@
+div {
+   word-wrap: break-word;
+   width: 700px;
+   margin-left: 40px;
+}
+
+
+.wrapper {
+  width: 100%;
+  /* whatever width you want */
+  display: inline-block;
+  position: relative;
+  background-size: contain !important;
+  margin: 0 auto;
+}
+.wrapper:after {
+  padding-top: 75%;
+  display: block;
+  content: '';
+}
+.main {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  color: black;
+  text-align: center;
+  margin-top: 5%;
+}
