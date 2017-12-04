@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-var margin = {top: 20, right: 20, bottom: 30, left: 50},
+var margin = {top: 20, right: 20, bottom: 30, left: 20},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -20,21 +20,20 @@ var valueline2 = d3.line()
     .x(function(d) { return x(d.YEAR); })
     .y(function(d) { return y(d.FEB); });
 
-// append the svg obgect to the body of the page
-// appends a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-//var svg = d3.select("body").append("svg")
-//    .attr("width", width + margin.left + margin.right)
-//    .attr("height", height + margin.top + margin.bottom)
-//  .append("g")
-//    .attr("transform",
-//          "translate(" + margin.left + "," + margin.top + ")");
+// define the 3rd line
+var valueline3 = d3.line()
+    .x(function(d) { return x(d.YEAR); })
+    .y(function(d) { return y(d.MAR); });
 
-var svg = d3.select("svg"),
-    margin = {top: 20, right: 80, bottom: 30, left: 50},
-    width = svg.attr("width") - margin.left - margin.right,
-    height = svg.attr("height") - margin.top - margin.bottom,
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var svg = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+
 
 // Get the data
 d3.csv("station.csv", function(error, data) {
@@ -45,18 +44,23 @@ d3.csv("station.csv", function(error, data) {
       d.YEAR = parseTime(d.YEAR);
       d.JAN = +d.JAN;
       d.FEB = +d.FEB;
+      d.MAR = +d.MAR;
   });
 
 
   // Scale the range of the data
   x.domain(d3.extent(data, function(d) { return d.YEAR; }));
-  y.domain([0, d3.max(data, function(d) {
-    return Math.max(d.JAN, d.FEB); })]);
+  y.domain([d3.min(data, function(d) {
+    return Math.min(d.JAN, d.FEB, d.MAR); }),
+     d3.max(data, function(d) {
+    return Math.max(d.JAN, d.FEB, d.MAR); })]);
 
   // Add the valueline path.
   svg.append("path")
       .data([data])
       .attr("class", "line")
+      .style("stroke","blue")
+      .style("fill","none")
       .attr("d", valueline);
 
   // Add the valueline2 path.
@@ -64,7 +68,16 @@ d3.csv("station.csv", function(error, data) {
       .data([data])
       .attr("class", "line")
       .style("stroke", "red")
+      .style("fill","none")
       .attr("d", valueline2);
+
+  // Add the valueline3 path.
+  svg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .style("stroke", "green")
+      .style("fill","none")
+      .attr("d", valueline3);
 
   // Add the X Axis
   svg.append("g")
