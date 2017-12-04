@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-var margin = {top: 20, right: 20, bottom: 30, left: 20},
+var margin = {top: 20, right: 20, bottom: 30, left: 30},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -25,6 +25,9 @@ var valueline3 = d3.line()
     .x(function(d) { return x(d.YEAR); })
     .y(function(d) { return y(d.MAR); });
 
+var valueline4 = d3.line()
+    .x(function(d) { return x(d.YEAR); })
+    .y(function(d) { return y(d.MEAN); });
 
 var svg = d3.select("body")
     .append("svg")
@@ -33,6 +36,11 @@ var svg = d3.select("body")
     .append("g")
         .attr("transform", 
               "translate(" + margin.left + "," + margin.top + ")");
+
+var mean_arr = [];
+
+
+
 
 
 // Get the data
@@ -45,39 +53,65 @@ d3.csv("station.csv", function(error, data) {
       d.JAN = +d.JAN;
       d.FEB = +d.FEB;
       d.MAR = +d.MAR;
+      d.APR = +d.APR;
+      d.MAY = +d.MAY;
+      d.JUN = +d.JUN;
+      d.JUL = +d.JUL;
+      d.AUG = +d.AUG;
+      d.SEP = +d.SEP;
+      d.OCT = +d.OCT;
+      d.NOV = +d.NOV;
+      d.DEC = +d.DEC;
+      d.MEAN = ((d.JAN+d.FEB+d.MAR+d.APR+d.MAY+d.JUN+d.JUL+d.AUG+d.SEP+d.OCT+d.NOV+d.DEC)/12);
   });
 
 
   // Scale the range of the data
   x.domain(d3.extent(data, function(d) { return d.YEAR; }));
   y.domain([d3.min(data, function(d) {
-    return Math.min(d.JAN, d.FEB, d.MAR); }),
+    return Math.min(d.MEAN); }),
      d3.max(data, function(d) {
-    return Math.max(d.JAN, d.FEB, d.MAR); })]);
+    return Math.max(d.MEAN); })]);
+
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10);  // set the colour scale
+
 
   // Add the valueline path.
-  svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .style("stroke","blue")
-      .style("fill","none")
-      .attr("d", valueline);
-
-  // Add the valueline2 path.
-  svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .style("stroke", "red")
-      .style("fill","none")
-      .attr("d", valueline2);
+//  svg.append("path")
+//      .data([data])
+//      .attr("class", "line")
+//      .style("stroke","blue")
+//      .style("fill","none")
+//      .style("stroke-width","2")
+//      .attr("d", valueline);
+//
+//  // Add the valueline2 path.
+//  svg.append("path")
+//      .data([data])
+//      .attr("class", "line")
+//      .style("stroke", "red")
+//      .style("stroke-width","2")
+//      .style("fill","none")
+//      .attr("d", valueline2);
+//
+//  // Add the valueline3 path.
+//  svg.append("path")
+//      .data([data])
+//      .attr("class", "line")
+//      .style("stroke", "green")
+//      .style("stroke-width","2")
+//      .style("fill","none")
+//      .attr("d", valueline3);
 
   // Add the valueline3 path.
   svg.append("path")
       .data([data])
       .attr("class", "line")
       .style("stroke", "green")
+      .style("stroke-width","2")
       .style("fill","none")
-      .attr("d", valueline3);
+      .attr("d", valueline4);
 
   // Add the X Axis
   svg.append("g")
