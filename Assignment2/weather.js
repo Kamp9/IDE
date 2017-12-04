@@ -29,6 +29,12 @@ var valueline4 = d3.line()
     .x(function(d) { return x(d.YEAR); })
     .y(function(d) { return y(d.MEAN); });
 
+var valueline5 = d3.line()
+    .x(function(d) { return x(d.YEAR); })
+    .y(function(d) { return y(d.FIVEMEAN); })
+    .curve(d3.curveBasis);
+
+
 var svg = d3.select("body")
     .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -65,6 +71,28 @@ d3.csv("station.csv", function(error, data) {
       d.MEAN = ((d.JAN+d.FEB+d.MAR+d.APR+d.MAY+d.JUN+d.JUL+d.AUG+d.SEP+d.OCT+d.NOV+d.DEC)/12);
   });
 
+  for(i = 0; i < data.length;i++){
+    if(i==0)
+    {
+      data[i].FIVEMEAN = (data[i].MEAN +data[i+1].MEAN+data[i+2].MEAN)/3;
+    }
+    else if(i==1)
+    {
+      data[i].FIVEMEAN = (data[i-1].MEAN +data[i].MEAN +data[i+1].MEAN+data[i+2].MEAN)/4;      
+    }
+    else if(i==data.length-2)
+    {
+      data[i].FIVEMEAN = (data[i-2].MEAN +data[i-1].MEAN +data[i].MEAN+data[i+1].MEAN)/4;      
+
+    }
+    else if(i == data.length-1)
+    {
+      data[i].FIVEMEAN = (data[i-2].MEAN +data[i-1].MEAN+data[i].MEAN)/3;      
+    }
+    else{
+    data[i].FIVEMEAN = ((data[i-2].MEAN +data[i-1].MEAN+data[i].MEAN +data[i+1].MEAN+data[i+2].MEAN)/5 ); 
+    }
+  }
 
   // Scale the range of the data
   x.domain(d3.extent(data, function(d) { return d.YEAR; }));
@@ -108,10 +136,18 @@ d3.csv("station.csv", function(error, data) {
   svg.append("path")
       .data([data])
       .attr("class", "line")
-      .style("stroke", "green")
+      .style("stroke", "grey")
       .style("stroke-width","2")
       .style("fill","none")
       .attr("d", valueline4);
+
+  svg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .style("stroke", "red")
+      .style("stroke-width","3")
+      .style("fill","none")
+      .attr("d", valueline5);
 
   // Add the X Axis
   svg.append("g")
