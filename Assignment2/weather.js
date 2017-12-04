@@ -158,4 +158,43 @@ d3.csv("station.csv", function(error, data) {
   svg.append("g")
       .call(d3.axisLeft(y));
 
+var focus = svg.append("g")
+      .attr("class", "focus")
+      .style("display", "none");
+
+  focus.append("circle")
+      .attr("r", 4.5);
+
+  focus.append("text")
+      .attr("x", 9)
+      .attr("dy", ".35em");
+
+  svg.append("rect")
+      .attr("class", "overlay")
+      .attr("width", width)
+      .attr("height", height)
+      .style("fill-opacity","0.0")
+      .on("mouseover", function() { focus.style("display", null); })
+      .on("mouseout", function() { focus.style("display", "none"); })
+      .on("mousemove", mousemove);
+
+  function mousemove() {
+    var x0 = x.invert(d3.mouse(this)[0]),
+        i = x0.getFullYear()-1880,//(data, x0, 1),
+        d0 = data[i - 1],
+        d1 = data[i],
+        d = x0 - d0.YEAR > d1.YEAR - x0 ? d1 : d0;
+    console.log(x0.getFullYear()-1880);
+    focus.attr("transform", "translate(" + x(d.YEAR) + "," + y(d.MEAN) + ")");
+    focus.select("text").text(d.MEAN);
+  }  //function mousemove() {
+  //  var x0 = x.invert(d3.mouse(this)[0]),
+  //      i = bisectDate(data, x0, 1),
+  //      d0 = data[i - 1],
+  //      d1 = data[i],
+  //      d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+  //  focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
+  //  focus.select("text").text(formatCurrency(d.close));
+  //}
+
 });
