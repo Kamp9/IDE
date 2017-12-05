@@ -2,10 +2,70 @@
 
 <html>
   <head>
+      <link rel="stylesheet" type="text/css" href="style.css"/>
 
   </head>
   <body>
-    <a href = "line.html"> line</a>
-    <a href = "spiral.html"> spiral</a>
+
+
+<div>
+  
+<br>  
+Motivation.
+<br>  
+The motivation behind visualizing the data, is to ease the interpretation an large dataset. 
+We choose the Copenhagen data from <a href =”http://data.giss.nasa.gov/gistemp/station_data/”> http://data.giss.nasa.gov/gistemp/station_data/ </a>. For each year in the period 1880-2011 (the last 5 years had some error measurements and is therefore ignored), we grouped the data for all the months into an average for the specific year. The composed data-points therefore makes the interpretation more straight forward, since we can look at less data and still observe the same pattern. Two virtual visualizations where made: <a href = "line.html"> line.html</a> and <a href = "spiral.html"> spiral.html</a>. The first, line.html, shows two lines. The temperature measurements for each year, with an interconnected line, and a soft line the average measurements for that time period. The motivation for the second line, is that it makes it easier to see the rising pattern in temperature, and each specific year can be seen without the peaks in temperature. A interactive mouseover is added to extract the exact values over the years. The second visualization, spiral.html, shows a spiral version of the same data. We tried to make the second visualization more desirable to explore, however we lose some clarity in the process. For each year, the temperature can be seen by a mouse over, and again the pattern of raising temperatures can be seen, although it is not as clear as in the first visualization.
+
+<br>
+<br>
+
+Method
+<br>
+For this visualization we use the mean temperature of each year to avoid cluttering the plot with a line for each month. Plotting the mean temperature gives a good idea of how the temperature has changed over the last century. On top of calculating the average temperature of each year we also perform an average of 5 years for each point. For example, the 5 year average of 1883 will be (1881+1882+1883+1884+1885)/5. This gives a smoother liner to better show the temperature trend.
+
+For our second visualization we create a spiral plot showing the mean temperature per year. In this plot the years are grouped together in clusters of 5 years. This grouping however, only determines the color of the blocks and not the data. This visualization is inspired by : https://bl.ocks.org/arpitnarechania/027e163073864ef2ac4ceb5c2c0bf616 where we adapt it to fit our data and years.
+
+<br>
+<br>
+
+Results/discussion
+<br>
+From the data and the plots we can see a general trend that the average temperature in Copenhagen has increased the last century, with the last century contributing greatly to this increase. 
+
+<br>
+<br>
+
+Conclusion
+<br>
+The average temperature of the planet is has increased during the last century, with the last 2 decades being the main contributor. This fact is also backed up by the data discussed in the individual questions.
+
+
+<br>
+<br>
+
+Individual part:
+
+
+(This part is made by wrz641)
+3.1: Which data set (that is realistically possible for you to obtain) and visualization would you include to give a more confident answer to the articles main question? A mockup is welcome. 
+  
+  To give a further evidence for our main point in question 2, I would include further data from NASA.
+  I would include the sea ice mass data: https://climate.nasa.gov/system/internal_resources/details/original/1270_minimum_extents_and_area_north_SBA_reg_20171001_2_.txt
+  and the CO2 levels data: ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt.
+
+  Visualizing these together with the average temperature of each year could show a clear correlation between them, enforcing the conclusion we made.
+
+  Furthermore, taking data from more cities than Copenhagen could also back up the points.
+
+
+<br>
+<br>
+
+(This part is made by blr156)
+3.3:
+There are two points to this question. Since large data can both be data with so much information that a visualization is extremely hard represent in a reasonable manner, and also the amount of data being computationally expensive to show. An example data with much information could be multiple images, we want to visualize with some kind of point. However we cannot show everything at once since the extensive information would be hard to interpret by a human, and make any kind of conclusions based on the data impossible. In the second case with computational large data, we would most likely begin to have trouble with some hundred megabytes. Especially if we run out of RAM we would be in much trouble since reading from disk is that much more time consuming. As mentioned in our solution of the visualizations, we have reduced the data to be 1/12 of the original. This could further be done if the data where larger. Another approach is to cluster data into chunks of data-points with similarities, in order to reduce the size of the data. 
+
+
+</div>
   </body>
 </html>
