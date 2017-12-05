@@ -178,7 +178,7 @@ var width = 500,
     svg.selectAll("rect")
     .on('mouseover', function(d) {
 
-        tooltip.select('.date').html("Date: <b>" + d.date.toDateString() + "</b>");
+        tooltip.select('.date').html("Date: <b>" + tF(d.date) + "</b>");
         tooltip.select('.value').html("Value: <b>" + Math.round(d.value*100)/100 + "<b>");
 
         d3.select(this)
