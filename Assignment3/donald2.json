@@ -8,21 +8,100 @@
 		{
 			"name" : "Ivana Trump",
             "class" : "woman"
-		}
+		},
+        "children": [
+            {
+                "name" : "Ivanka Trump",
+                "class" : "woman",
+                "marriages":[
+                    {
+                        "spouse":{
+                            "name" : "Jared Kushner",
+                            "class": "man"
+                        },
+                        "children" : [
+                            {
+                                "name" : "Arabella Rose",
+                                "class" : "woman"
+                            },
+                            {
+                                "name" : "Joseph Frederick",
+                                "class" : "man"
+                            },
+                            {
+                                "name" : "Theodore James",
+                                "class" : "man"
+                            }]
+                    }]
+
+            },
+            {
+                "name" : "Donald Trump Jr.",
+                "class" : "man",
+                "marriages" : [
+                    {
+                        "spouse" : 
+                        {
+                            "name" : "Vanessa Trump",
+                            "class" : "woman"
+                        },
+                        "children" : [
+                            {
+                              "name": "Kai Madison",
+                              "class" : "woman"
+                            },
+                            {
+                              "name": "Donald III",
+                              "class" : "woman"
+                            },
+                            {
+                              "name": "Chloe Sophia",
+                              "class" : "woman"
+                            },
+                            {
+                              "name": "Tristan Milos",
+                              "class" : "man"
+                            },
+                            {
+                              "name": "Spencer Frederick",
+                              "class" : "man"
+                            }
+                            ]
+                    }]
+            },
+            {
+                "name" : "Eric Trump",
+                "class" : "man",
+                "marriages" : [
+                    {
+                        "spouse" : {
+                            "name" : "Lara Yunaska",
+                            "class" : "woman"
+                        }
+                    }]
+            }]	
 	},
-	{
-	"spouse" : 
-		{
+    {
+        "spouse" : {
             "name" : "Marla Maples",
-            "class" : "woman"
-		}
-	},
-	{
-	"spouse" :
-		{
+            "class" : "woman"     
+        },
+        "children" :[
+            {
+                "name" : "Tiffany Trump",
+                "class" : "woman"
+            }]
+    },
+    {
+        "spouse" : {
             "name" : "Melanie Trump",
-            "class"  "woman"
-		}
-	}]
+            "class" : "woman"
+        }    ,
+        "children" : [
+            {
+                "name" : "Baron von Trump",
+                "class" : "man"
+            }]
+    }]
 
 }]
