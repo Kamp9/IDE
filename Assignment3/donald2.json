@@ -1,0 +1,28 @@
+[{
+	"name" : "Donald Trump",
+	"class" : "man",
+	"textClass" : "emphasis",
+	"marriages":[
+	{
+	"spouse" : 
+		{
+			"name" : "Ivana Trump",
+            "class" : "woman"
+		}
+	},
+	{
+	"spouse" : 
+		{
+            "name" : "Marla Maples",
+            "class" : "woman"
+		}
+	},
+	{
+	"spouse" :
+		{
+            "name" : "Melanie Trump",
+            "class"  "woman"
+		}
+	}]
+
+}]
