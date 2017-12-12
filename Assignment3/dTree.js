@@ -46,7 +46,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var svg = this.svg = d3.select(opts.target).append('svg').attr('width', width).attr('height', height).call(zoom).append('g').attr('transform', 'translate(' + width / 2 + ',' + opts.margin.top + ')');
 
         // Compute the layout.
-        this.tree = d3.tree().nodeSize([nodeSize[0] * 2, nodeSize[1] * 2.5]);
+        this.tree = d3.tree().nodeSize([nodeSize[0] * 2, nodeSize[1] * 10.5]);
 
         this.tree.separation(function separation(a, b) {
           if (a.data.hidden || b.data.hidden) {
@@ -93,7 +93,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }).attr('width', function (d) {
           return d.cWidth + 'px';
         }).attr('height', function (d) {
-          return d.cHeight + 'px';
+          return 20 + d.cHeight + 'px';
         }).attr('id', function (d) {
           return d.id;
         }).html(function (d) {
@@ -185,7 +185,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         // Not first marriage
         if (d.number > 0) {
-          ny -= nodeHeight * 8 / 10;
+          ny -= 5 * nodeHeight * 8 / 10;
         }
 
         var linedata = [{

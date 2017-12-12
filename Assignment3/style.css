@@ -10,12 +10,12 @@ svg {
     stroke: black;
 }
 .man {
-    background-color: lightblue;
+    background-color: #00a2e6;
     border-style: solid;
     border-width: 1px;
 }
 .woman {
-    background-color: pink;
+    background-color: #ff00a4;
     border-style: solid;
     border-width: 1px;
 }
