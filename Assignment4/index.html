@@ -9,10 +9,9 @@
 
 </head>
 <body>
-<div id="wrap">
-<h1>Project 4 </h1>
-<script src="vis.js"></script>
-
+<div style="width:1024px; margin:auto;">
+    <h1>Project 4 </h1>
+    <script src="vis.js"></script>
 </div>
 
 
@@ -20,7 +19,23 @@
 <div class="container">
     <div class="panel panel-default">
             <div class="panel-body">    
-                <p>BLABLABLA</p>
+                <p> The visualization is separated into two parts.
+                    First, on the left, all 40 hand outlines a shown on top of each other.
+                    The right part, shows the first two dimensions of the PCA, one for each hand outline.
+                    By clicking the points in the scatter plot, the corresponding hand is outlined with red.
+                    <br> <br>
+                    A PCA simply selects the k most significant dimensions based on variance. In this case,
+                    since we want to visualize the PCA, the two first dimensions are selected.
+                    This makes for a good 2D visualization scatter plot.
+                    In this specific dataset we therefore see pattern that spread-out fingers are on the left points in the PCA.
+                    The fingers close together, are to the right, in the PCA representation.
+                    Furthermore, the higher the points are placed, the more spread out the thumb and index finger finger.
+                    The little and ring finger are more separated as lower the PCA point is placed in the scatter plot.
+                    <br><br>
+                    wrz641 - Show multiple hands in the same plot and outline the selected hand.
+                    <br>
+                    blr156 - ****
+                </p>
             </div>
     </div>
 </div>
