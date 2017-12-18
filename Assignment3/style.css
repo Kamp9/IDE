@@ -27,10 +27,17 @@ p {
     margin:0;
 }
 
+body {
+    background-color: #e8e8e66b;
+
+}
 h1 {
-    background-color: #E8E8E6;
+    background-color: #d6d6d66b;
+
     text-align: justify;
-    text-indent: 100px;
-    font: 11px Droid-sans;
+    margin-left: 90px;
+    font: 13px Droid-sans;
+    word-wrap: break-word;
+    width: 700px;
 
 }
