@@ -34,14 +34,18 @@ d3.text("hands.csv",function(error, text) {
       dataLOL.push({"x" : data[j][i],"y" : data[j][i+56]});
     }
   
-   g2.append("path")
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 1.5)
-        .attr("d", line(dataLOL));
-    }
+    /// CREATING LINE HERE /////////
+    g2.append("path")
+         .attr("fill", "none")
+         .attr("stroke", "steelblue")
+         .attr("stroke-linejoin", "round")
+         .attr("stroke-linecap", "round")
+         .attr("stroke-width", 1.5)
+         .attr("id","l"+j)
+//         .attr("visibility","hidden")
+         .style("opacity",0.1)
+         .attr("d", line(dataLOL));
+     }
 });
 
 
@@ -65,38 +69,53 @@ d3.text("hands_pca.csv",function(error, text) {
 
   
   var dataScatter = []
-  console.log(data[39][0]);
 
   for(i=0 ;i < data.length;i++){
-    dataScatter.push({"x" : data[i][0],"y" : data[i][1]});
+    dataScatter.push({"x" : data[i][0],"y" : data[i][1],"id" : i});
   }
 
   console.log(dataScatter);
-  var xMap = function(d){return 100*d.x+width/2};
-  var yMap = function(d){return 100*d.y+height/2};
+  var xMap = function(d){return 300*d.x+width/2};
+  var yMap = function(d){return 300*d.y+height/2};
 
   // draw dots
   svg.selectAll(".dot")
       .data(dataScatter)
     .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 3.5)
+      .attr("r", 4.5)
       .attr("cx", xMap)
       .attr("cy", yMap)
+      .attr('id', function (d) {
+          return d.id;})
       .style("fill","none")
-      .style("fill", function(d) { return color(d);}) 
-//      .on("mouseover", function(d) {
-//          tooltip.transition()
-//               .duration(200)
-//               .style("opacity", .9);
-//          tooltip.html(d["Cereal Name"] + "<br/> (" + xValue(d) 
-//          + ", " + yValue(d) + ")")
-//               .style("left", (d3.event.pageX + 5) + "px")
-//               .style("top", (d3.event.pageY - 28) + "px");
-//      })
-//      .on("mouseout", function(d) {
-//          tooltip.transition()
-//               .duration(500)
-//               .style("opacity", 0);
-//      });
+      .style("stroke","black")
+      .style("fill", function(d) { return color(d);})
+      .on("click",function(d){
+        console.log(d.id);
+        var tmp = d.id;
+        d3.selectAll(".dot").style("fill",function(d) { return color(d);});
+        d3.select(this).style("fill","red");
+        console.log(d3.selectAll(".path"));
+        //d3.selectAll("path").attr("visibility","hidden"); // Hide all other hands
+        d3.selectAll("path").style("opacity",0.1); // Hide all other hands
+        d3.selectAll("path").attr("stroke","steelblue"); // Hide all other hands
+        //d3.select("#l"+tmp).attr("visibility","visible"); // Show chose hand.
+        d3.select("#l"+tmp).style("opacity",1); // Show chose hand.
+        d3.select("#l"+tmp).attr("stroke", "red");
+ // Show chose hand.
+      }) 
 });
+
+//var holder = d3.select("body")
+//      .append("svg")
+//      .attr("transform", "translate(" + -600 + "," + 400 + ")")
+//      .attr("width", width)    
+//      .attr("height", height); 
+//
+//holder.append("text")
+//  .style("fill", "black")
+//  .style("font-size", "13")
+//  .attr("dy", "1em")
+//  .attr("text-anchor", "middle")
+//  .text("Man kan også skrive tekst her med d3");
