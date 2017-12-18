@@ -12,11 +12,6 @@ for l in test:
 
 plt.scatter(x,y)
 plt.show()
-
-
 test2 =  np.genfromtxt("hands.csv",delimiter=",")
-
-
-
 #plt.plot(test2[0][0:56],test2[0][56:])
 #plt.show()
