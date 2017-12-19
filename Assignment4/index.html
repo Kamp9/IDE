@@ -15,14 +15,15 @@
 </div>
 
 
-<div class="section">
-<div class="container">
+    <div class="section">
+        <div class="container">
     <div class="panel panel-default">
-            <div class="panel-body">    
+            <div class="panel-body">
                 <p> The visualization is separated into two parts.
                     First, on the left, all 40 hand outlines a shown on top of each other.
                     The right part, shows the first two dimensions of the PCA, one for each hand outline.
                     By clicking the points in the scatter plot, the corresponding hand is outlined with red.
+                    Furthermore, the index of the point, along with the x and y value shows as an tooltip when mouse over.
                     <br> <br>
                     A PCA simply selects the k most significant dimensions based on variance. In this case,
                     since we want to visualize the PCA, the two first dimensions are selected.
@@ -34,7 +35,7 @@
                     <br><br>
                     wrz641 - Show multiple hands in the same plot and outline the selected hand.
                     <br>
-                    blr156 - ****
+                    blr156 - Tooltips for mouse over with ID, x, and y value, inspired by <a href="https://stackoverflow.com/questions/10805184/show-data-on-mouseover-of-circle">this</a>
                 </p>
             </div>
     </div>
@@ -42,3 +43,4 @@
 </div>
 </body>
 </html>
+

@@ -1,4 +1,6 @@
 
+
+
 // Setup properties for svg
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 400 - margin.left - margin.right,
@@ -78,7 +80,15 @@ d3.text("hands_pca.csv",function(error, text) {
   var xMap = function(d){return 300*d.x+width/2};
   var yMap = function(d){return 300*d.y+height/2};
 
-  // draw dots
+  var tooltip = d3.select("body")
+      .append("div")
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("visibility", "hidden")
+      .style("background", "steelblue")
+      .text("a simple tooltip");
+
+    // draw dots
   svg.selectAll(".dot")
       .data(dataScatter)
     .enter().append("circle")
@@ -91,6 +101,19 @@ d3.text("hands_pca.csv",function(error, text) {
       .style("fill","none")
       .style("stroke","black")
       .style("fill", function(d) { return color(d);})
+
+      .on("mouseover", function(d) {
+          tooltip.text("ID:" + d.id + ", x: " + d.x + ', y: ' + d.y);
+          return tooltip.style("visibility", "visible");
+      })
+      .on("mousemove", function() {
+          return tooltip.style("top",
+              (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+      })
+      .on("mouseout", function() {
+          return tooltip.style("visibility", "hidden");
+      })
+
       .on("click",function(d){
         console.log(d.id);
         var tmp = d.id;
@@ -103,8 +126,7 @@ d3.text("hands_pca.csv",function(error, text) {
         //d3.select("#l"+tmp).attr("visibility","visible"); // Show chose hand.
         d3.select("#l"+tmp).style("opacity",1); // Show chose hand.
         d3.select("#l"+tmp).attr("stroke", "red");
- // Show chose hand.
-      }) 
+        })
 });
 
 //var holder = d3.select("body")
