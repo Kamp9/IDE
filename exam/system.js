@@ -36,7 +36,7 @@ function calculateColor(t, min_t, max_t) {
     var g = 255 - Math.abs(temp_mean - t) * temp_range * 2;
     var b = 255 - Math.abs(min_t - t) * temp_range;
     console.log(Math.floor(r), Math.floor(g), Math.floor(b));
-    return [Math.floor(r), Math.floor(g), Math.floor(b)];
+    return d3.rgb(Math.floor(r), Math.floor(g), Math.floor(b));
 }
 
 
@@ -82,7 +82,7 @@ container.selectAll("g.planet").data(data).enter().append("g")
     //d3.select(this).append("circle").attr("class", "orbit")
     //  .attr("r", d['P. Mean Distance (AU)']*1000);
     d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",d['P. Mean Distance (AU)']*1000)
-      .attr("cy", 0).attr("class", "planet").style("fill", d3.rgb(calculateColor(d['P. Ts Mean (K)'], t_min, t_max)))
+      .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], t_min, t_max)))
   });
 
 
