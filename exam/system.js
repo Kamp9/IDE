@@ -6,15 +6,20 @@ var planets = [
   { R: 150, r: 10, speed: 2, phi0: 190}
 ];
 
-d3.text("planets.csv",function(error, text) {
+d3.csv("planets.csv",function(error, data) {
   if (error) throw error;
 
-  var data = d3.csvParseRows(text).map(function(row) {
-    return row.map(function(value) {
-      return +value;
-    });
+
+  data.forEach(function(d){
+    d['P. Mass (EU)'] = + d['P. Mass (EU)']
+    d['P. Gravity (EU)'] = + d['P. Gravity (EU)']
+    d['P. Disc. Year'] = + d['P. Disc. Year']
+    d['P. Habitable'] = + d['P. Habitable']
+    d['P. Radius (EU)'] = + d['P. Radius (EU)']
+    d['P. Ts Mean (K)'] = + d['P. Ts Mean (K)']
+    d['P. Mean Distance (AU)'] = + d['P. Mean Distance (AU)']
   });
-});
+  console.log(data);
 
 
 var svg = d3.select("#planetarium").insert("svg")
@@ -39,4 +44,6 @@ d3.timer(function() {
   svg.selectAll(".planet").attr("transform", function(d) {
     return "rotate(" + d.phi0 + delta * d.speed/200 + ")";
   });
+});
+
 });
