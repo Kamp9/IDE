@@ -17,6 +17,7 @@ d3.csv("habit_planets.csv",function(error, data) {
     d['P. Mean Distance (AU)'] = + d['P. Mean Distance (AU)']
     d['P. Period (days)'] = + d['P. Period (days)']
     d['S. Mass (SU)'] = + d['S. Mass (SU)']
+    d['S. Radius (SU)'] = + d['S. Radius (SU)']
     d.phi0 = 190
   });
   console.log(data);
@@ -36,8 +37,8 @@ var svg = d3.select("#planetarium").insert("svg")
 var sun_size = 70;
 svg.append("svg:image")
     .attr("xlink:href", "sun.png")
+    .attr("id", "sun")
     .attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size).attr("class", "sun");
-
 
 // tooltips
 var tip = d3.tip()
@@ -55,7 +56,10 @@ var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")")
 
 container.selectAll("g.planet").data(data).enter().append("g")
-    .on('mouseenter', tip.show)
+    .on('mouseenter', tip.show,function(d){
+        sun_size = d['S. Radius (SU)'] *100;
+        d3.select("#svg:image").attr("opacity","0");
+    })
     .on('mouseout', tip.hide)
     .attr("class", "planet").each(function(d, i) {
     //d3.select(this).append("circle").attr("class", "orbit")
