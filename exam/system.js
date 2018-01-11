@@ -30,10 +30,10 @@ var svg = d3.select("#planetarium").insert("svg")
     slowdown = 1;
   });
 
-
+var sun_size = 70;
 svg.append("svg:image")
     .attr("xlink:href", "sun.png")
-    .attr("x", w/2).attr("y", h/2).attr("height", 70).attr("width", 70).attr("class", "sun");
+    .attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size).attr("class", "sun");
 
 
 var container = svg.append("g")
