@@ -58,7 +58,7 @@ var container = svg.append("g")
 container.selectAll("g.planet").data(data).enter().append("g")
     .on('mouseenter', tip.show,function(d){
         sun_size = d['S. Radius (SU)'] *100;
-        d3.select("#svg:image").attr("opacity","0");
+        d3.select("svg:image").attr("opacity","0");
     })
     .on('mouseout', tip.hide)
     .attr("class", "planet").each(function(d, i) {
