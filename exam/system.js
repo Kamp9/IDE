@@ -5,8 +5,8 @@ var slowdown = 1;
 
 d3.csv("habit_planets.csv",function(error, data) {
   if (error) throw error;
-
-
+  var t_min = 0;
+  var t_max = 0;
   data.forEach(function(d){
     d['P. Mass (EU)'] = + d['P. Mass (EU)']
     d['P. Gravity (EU)'] = + d['P. Gravity (EU)']
@@ -19,8 +19,25 @@ d3.csv("habit_planets.csv",function(error, data) {
     d['S. Mass (SU)'] = + d['S. Mass (SU)']
     d['S. Radius (SU)'] = + d['S. Radius (SU)']
     d.phi0 = 190
+    if (d['P. Ts Mean (K)'] > t_max) {
+        t_max = d['P. Ts Mean (K)'];
+    }
+    if (d['P. Ts Mean (K)'] < t_min) {
+        t_min = d['P. Ts Mean (K)'];
+    }
   });
   console.log(data);
+
+
+function calculateColor(t, min_t, max_t) {
+    var temp_range = 255.0 / max_t - min_t;
+    var temp_mean = max_t + min_t / 2.0;
+    var r = 255 - Math.abs(max_t - t) * temp_range;
+    var g = 255 - Math.abs(temp_mean - t) * temp_range * 2;
+    var b = 255 - Math.abs(min_t - t) * temp_range;
+    console.log(Math.floor(r), Math.floor(g), Math.floor(b));
+    return [Math.floor(r), Math.floor(g), Math.floor(b)];
+}
 
 
 var svg = d3.select("#planetarium").insert("svg")
@@ -53,7 +70,7 @@ var tip = d3.tip()
 svg.call(tip);
 
 var container = svg.append("g")
-.attr("transform", "translate(" + w/2 + "," + h/2 + ")")
+.attr("transform", "translate(" + w/2 + "," + h/2 + ")");
 
 container.selectAll("g.planet").data(data).enter().append("g")
     .on('mouseenter', tip.show,function(d){
@@ -65,8 +82,10 @@ container.selectAll("g.planet").data(data).enter().append("g")
     //d3.select(this).append("circle").attr("class", "orbit")
     //  .attr("r", d['P. Mean Distance (AU)']*1000);
     d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",d['P. Mean Distance (AU)']*1000)
-      .attr("cy", 0).attr("class", "planet");
+      .attr("cy", 0).attr("class", "planet").style("fill", d3.rgb(calculateColor(d['P. Ts Mean (K)'], t_min, t_max)))
   });
+
+
 
 var speed = 0;
 d3.timer(function() {
