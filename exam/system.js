@@ -16,6 +16,7 @@ d3.csv("habit_planets.csv",function(error, data) {
     d['P. Ts Mean (K)'] = + d['P. Ts Mean (K)']
     d['P. Mean Distance (AU)'] = + d['P. Mean Distance (AU)']
     d['P. Period (days)'] = + d['P. Period (days)']
+    d['S. Mass (SU)'] = + d['S. Mass (SU)']
     d.phi0 = 190
   });
   console.log(data);
@@ -30,13 +31,15 @@ var svg = d3.select("#planetarium").insert("svg")
     slowdown = 1;
   });
 
+
+// sun settings
 var sun_size = 70;
 svg.append("svg:image")
     .attr("xlink:href", "sun.png")
     .attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size).attr("class", "sun");
 
 
-
+// tooltips
 var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-40, 0])
@@ -63,7 +66,6 @@ container.selectAll("g.planet").data(data).enter().append("g")
 
 var speed = 0;
 d3.timer(function() {
-  // if(slowdown==1){
   var delta = (Date.now() - t0);
   svg.selectAll(".planet").attr("transform", function(d) {
     if(slowdown==1){
@@ -74,7 +76,6 @@ d3.timer(function() {
     }
     return "rotate(" + d.phi0 + speed * (1/d['P. Period (days)'])/2 + ")";
   });
-    // }
 });
 
 });
