@@ -1,6 +1,8 @@
 var w = 1200, h = 1200;
 var t0 = Date.now();
 
+var slowdown = 1;
+
 d3.csv("habit_planets.csv",function(error, data) {
   if (error) throw error;
 
@@ -20,7 +22,13 @@ d3.csv("habit_planets.csv",function(error, data) {
 
 
 var svg = d3.select("#planetarium").insert("svg")
-  .attr("width", w).attr("height", h);
+  .attr("width", w).attr("height", h)
+  .on("mouseover",function(d){
+    slowdown = 0;
+  })
+  .on("mouseout",function(d){
+    slowdown = 1;
+  });
 
 
 svg.append("svg:image")
@@ -39,15 +47,24 @@ container.selectAll("g.planet").data(data).enter().append("g")
     .attr("class", "planet").each(function(d, i) {
     //d3.select(this).append("circle").attr("class", "orbit")
     //  .attr("r", d['P. Mean Distance (AU)']*1000);
-    d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*3).attr("cx",d['P. Mean Distance (AU)']*1000)
+    d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",d['P. Mean Distance (AU)']*1000)
       .attr("cy", 0).attr("class", "planet");
   });
 
+var speed = 0;
 d3.timer(function() {
+  // if(slowdown==1){
   var delta = (Date.now() - t0);
   svg.selectAll(".planet").attr("transform", function(d) {
-    return "rotate(" + d.phi0 + delta * d['P. Period (days)']/2000 + ")";
+    if(slowdown==1){
+        speed += 0.12;
+    }else{
+        speed += 0.02;
+        
+    }
+    return "rotate(" + d.phi0 + speed * (1/d['P. Period (days)'])/2 + ")";
   });
+    // }
 });
 
 });
