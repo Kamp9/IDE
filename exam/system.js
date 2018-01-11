@@ -22,8 +22,11 @@ d3.csv("habit_planets.csv",function(error, data) {
 var svg = d3.select("#planetarium").insert("svg")
   .attr("width", w).attr("height", h);
 
-svg.append("circle").attr("r", 20).attr("cx", w/2)
-.attr("cy", h/2).attr("class", "sun")
+
+svg.append("svg:image")
+    .attr("xlink:href", "sun.png")
+    .attr("x", w/2).attr("y", h/2).attr("height", 70).attr("width", 70).attr("class", "sun");
+
 
 var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")")
