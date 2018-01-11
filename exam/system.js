@@ -16,6 +16,7 @@ d3.csv("habit_planets.csv",function(error, data) {
     d['P. Ts Mean (K)'] = + d['P. Ts Mean (K)']
     d['P. Mean Distance (AU)'] = + d['P. Mean Distance (AU)']
     d['P. Period (days)'] = + d['P. Period (days)']
+    d['S. Mass (SU)'] = + d['S. Mass (SU)']
     d.phi0 = 190
     if (d['P. Ts Mean (K)'] > t_max) {
         t_max = d['P. Ts Mean (K)'];
@@ -47,19 +48,32 @@ var svg = d3.select("#planetarium").insert("svg")
     slowdown = 1;
   });
 
+
+// sun settings
 var sun_size = 70;
 svg.append("svg:image")
     .attr("xlink:href", "sun.png")
     .attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size).attr("class", "sun");
 
+
+// tooltips
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-40, 0])
+  .html(function(d) {
+    return "<strong>Name:</strong> <span style='color:red'>" + d['P. Name'] + "</span><br>"+
+           "<strong>Mass:</strong> <span style='color:red'>" + d['P. Mass (EU)'] + "</span><br>"+
+           "<strong>Radius:</strong> <span style='color:red'>" + d['P. Radius (EU)'] + "</span><br>";
+  })
+
+svg.call(tip);
+
 var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")");
 
 container.selectAll("g.planet").data(data).enter().append("g")
-    .on("mouseover", function(d) {
-        console.log(d['P. Name']);
-        // show facts in textbox
-      })
+    .on('mouseenter', tip.show)
+    .on('mouseout', tip.hide)
     .attr("class", "planet").each(function(d, i) {
     //d3.select(this).append("circle").attr("class", "orbit")
     //  .attr("r", d['P. Mean Distance (AU)']*1000);
@@ -71,18 +85,16 @@ container.selectAll("g.planet").data(data).enter().append("g")
 
 var speed = 0;
 d3.timer(function() {
-  // if(slowdown==1){
   var delta = (Date.now() - t0);
   svg.selectAll(".planet").attr("transform", function(d) {
     if(slowdown==1){
         speed += 0.12;
     }else{
-        speed += 0.02;
+        speed += 0.01;
         
     }
     return "rotate(" + d.phi0 + speed * (1/d['P. Period (days)'])/2 + ")";
   });
-    // }
 });
 
 });
