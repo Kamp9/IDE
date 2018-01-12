@@ -5,7 +5,7 @@ var slowdown = 1;
 
 d3.csv("habit_planets.csv",function(error, data) {
   if (error) throw error;
-  var t_min = 0;
+  var t_min = Infinity;
   var t_max = 0;
   data.forEach(function(d){
     d['P. Mass (EU)'] = + d['P. Mass (EU)']
@@ -26,16 +26,15 @@ d3.csv("habit_planets.csv",function(error, data) {
         t_min = d['P. Ts Mean (K)'];
     }
   });
-  console.log(data);
+
 
 
 function calculateColor(t, min_t, max_t) {
-    var temp_range = 255.0 / max_t - min_t;
-    var temp_mean = max_t + min_t / 2.0;
+    var temp_range = 255.0 / (max_t - min_t);
+    var temp_mean = (max_t + min_t) / 2.0;
     var r = 255 - Math.abs(max_t - t) * temp_range;
     var g = 255 - Math.abs(temp_mean - t) * temp_range * 2;
     var b = 255 - Math.abs(min_t - t) * temp_range;
-    console.log(Math.floor(r), Math.floor(g), Math.floor(b));
     return d3.rgb(Math.floor(r), Math.floor(g), Math.floor(b));
 }
 
