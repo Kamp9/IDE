@@ -2,6 +2,8 @@ var w = 1200, h = 1200;
 var t0 = Date.now();
 
 var slowdown = 1;
+var sun_global_img = null;
+
 
 d3.csv("habit_planets.csv",function(error, data) {
   if (error) throw error;
@@ -27,6 +29,7 @@ d3.csv("habit_planets.csv",function(error, data) {
     }
   });
 
+  console.log(data);
 
 
 function calculateColor(t, min_t, max_t) {
@@ -56,28 +59,49 @@ svg.append("svg:image")
     .attr("id", "sun")
     .attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size).attr("class", "sun");
 
+
+sun_global_img = svg.select("#sun");
+
+// sun_global_img.attr("x",0);
+
 // tooltips
 var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-40, 0])
   .html(function(d) {
     return "<strong>Name:</strong> <span style='color:red'>" + d['P. Name'] + "</span><br>"+
-           "<strong>Mass:</strong> <span style='color:red'>" + d['P. Mass (EU)'] + "</span><br>"+
+           "<strong>Mass:</strong> <span style='color:red'>" + d['P. Mass (EU)'] +" EU" +"</span><br>"+
            "<strong>Radius:</strong> <span style='color:red'>" + d['P. Radius (EU)'] + "</span><br>"+
            "<strong>Temperature:</strong> <span style='color:red'>" + (d['P. Ts Mean (K)']-273).toFixed(2)+('\xB0')+ "C" + "</span><br>";
   })
 
+var tip2 = d3.tip()
+  .attr('class', 'd3-tip2')
+  .html(function(d){
+    return "<strong>Name:</strong> <span style='color:red'>"+d['S. Name']+"</span><br>"+
+    "<strong>Constellation:</strong> <span style='color:red'>"+d['S. Constellation']+"</span><br>"+
+    "<strong>Mass:</strong> <span style='color:red'>"+d['S. Mass (SU)']+ " SU"+"</span><br>";
+    })
 svg.call(tip);
+svg.call(tip2);
 
 var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")");
 
 container.selectAll("g.planet").data(data).enter().append("g")
-    .on('mouseenter', tip.show,function(d){
-        sun_size = d['S. Radius (SU)'] *100;
-        d3.selectAll("#planetarium").attr("fill","black");
+    // .on('mouseenter', suntip.show)
+    .on('mouseenter', function(d){
+        tip.show(d);
+        tip2.show(d);
     })
-    .on('mouseout', tip.hide)
+    .on('mouseover',function(d){
+        sun_size = d['S. Radius (SU)'] *100;
+        sun_global_img.attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size);
+    })
+    .on('mouseout',function(){
+        tip.hide();
+        tip2.hide();
+    })    
     .attr("class", "planet").each(function(d, i) {
     //d3.select(this).append("circle").attr("class", "orbit")
     //  .attr("r", d['P. Mean Distance (AU)']*1000);
