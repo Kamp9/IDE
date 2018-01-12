@@ -64,7 +64,7 @@ var tip = d3.tip()
     return "<strong>Name:</strong> <span style='color:red'>" + d['P. Name'] + "</span><br>"+
            "<strong>Mass:</strong> <span style='color:red'>" + d['P. Mass (EU)'] + "</span><br>"+
            "<strong>Radius:</strong> <span style='color:red'>" + d['P. Radius (EU)'] + "</span><br>"+
-           "<strong>Temperature:</strong> <span style='color:red'>" + (d['P. Ts Mean (K)']-273) + "</span><br>";
+           "<strong>Temperature:</strong> <span style='color:red'>" + (d['P. Ts Mean (K)']-273).toFixed(2)+('\xB0')+ "C" + "</span><br>";
   })
 
 svg.call(tip);
@@ -75,7 +75,7 @@ var container = svg.append("g")
 container.selectAll("g.planet").data(data).enter().append("g")
     .on('mouseenter', tip.show,function(d){
         sun_size = d['S. Radius (SU)'] *100;
-        d3.select("svg:image").attr("opacity","0");
+        d3.selectAll("#planetarium").attr("fill","black");
     })
     .on('mouseout', tip.hide)
     .attr("class", "planet").each(function(d, i) {
