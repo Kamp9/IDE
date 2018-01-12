@@ -84,6 +84,17 @@ body {
   color: #fff;
   border-radius: 2px;
 }
+.d3-tip2 {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  top:1600px!important;
+  left:55%!important;
+  margin-left:-100px;
+}
 
 #mainBubble {
     /*background: #fff;*/
