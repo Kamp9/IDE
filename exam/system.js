@@ -1,3 +1,11 @@
+// include the menu.js file
+var script  = document.createElement('script');
+script.src  = "menu.js";
+script.type = 'text/javascript';
+script.defer = true;
+document.getElementsByTagName('head').item(0).appendChild(script);
+
+
 var w = 1200, h = 1200;
 var t0 = Date.now();
 
@@ -64,7 +72,7 @@ var tip = d3.tip()
     return "<strong>Name:</strong> <span style='color:red'>" + d['P. Name'] + "</span><br>"+
            "<strong>Mass:</strong> <span style='color:red'>" + d['P. Mass (EU)'] + "</span><br>"+
            "<strong>Radius:</strong> <span style='color:red'>" + d['P. Radius (EU)'] + "</span><br>"+
-           "<strong>Temperature:</strong> <span style='color:red'>" + (d['P. Ts Mean (K)']-273).toFixed(2)+('\xB0')+ "C" + "</span><br>";
+           "<strong>Temperature:</strong> <span style='color:red'>" + (d['P. Ts Mean (K)'] - 273.15).toFixed(2)+('\xB0')+ "C" + "</span><br>";
   })
 
 svg.call(tip);
