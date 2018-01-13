@@ -44,9 +44,6 @@ var root = {
         }, {
             "name": "Economy",
             "address": "http://environment.umn.edu"
-        }, {
-            "name": "Agriculture",
-            "address": "http://uis.edu/ens"
         }]
     }, {
         "name": "Data",
@@ -83,7 +80,7 @@ var svg = d3.select("#mainBubble").append("svg")
 var mainNote = svg.append("text")
     .attr("id", "bubbleItemNote")
     .attr("x", 10)
-    .attr("y", w1 / 2 - 15)
+    .attr("y", w1 / 2 - 100)
     .attr("font-size", 30)
     .attr("dominant-baseline", "middle")
     .attr("alignment-baseline", "middle")
@@ -221,10 +218,10 @@ resetBubbles = function() {
     w1 = 1200;
     oR = w1 / (1 + 3 * nTop);
 
-    h = Math.ceil(w1 / nTop * 2);
+    h1 = Math.ceil(w1 / nTop * 2);
     svgContainer.style("height", h1 + "px");
 
-    mainNote.attr("y", h1 - 15);
+    mainNote.attr("y", h1 - 100);
 
     svg.attr("width", w1);
     svg.attr("height", h1);
