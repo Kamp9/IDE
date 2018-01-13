@@ -64,18 +64,18 @@ var root = {
     }]
 };
 
-var w = 1100;
-var h = Math.ceil(w * 0.5);
+var w1 = 1200;
+var h1 = Math.ceil(w1 * 0.5);
 var oR = 0;
 var nTop = 0;
 
 var svgContainer = d3.select("#mainBubble")
-    .style("height", h + "px");
+    .style("height", h1 + "px");
 
 var svg = d3.select("#mainBubble").append("svg")
     .attr("class", "mainBubbleSVG")
-    .attr("width", w)
-    .attr("height", h)
+    .attr("width", w1)
+    .attr("height", h1)
     .on("mouseleave", function() {
         return resetBubbles();
     });
@@ -83,7 +83,7 @@ var svg = d3.select("#mainBubble").append("svg")
 var mainNote = svg.append("text")
     .attr("id", "bubbleItemNote")
     .attr("x", 10)
-    .attr("y", w / 2 - 15)
+    .attr("y", w1 / 2 - 15)
     .attr("font-size", 30)
     .attr("dominant-baseline", "middle")
     .attr("alignment-baseline", "middle")
@@ -101,10 +101,10 @@ var bubbleObj = svg.selectAll(".topBubble")
 
 console.log(root);
 nTop = root.children.length;
-oR = w / (1 + 3 * nTop);
+oR = w1 / (1 + 3 * nTop);
 
-h = Math.ceil(w / nTop * 2);
-svgContainer.style("height", h + "px");
+h1 = Math.ceil(w1 / nTop * 2);
+svgContainer.style("height", h1 + "px");
 
 var colVals = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -119,7 +119,7 @@ bubbleObj.append("circle")
     .attr("cx", function(d, i) {
         return oR * (3 * (1 + i) - 1);
     })
-    .attr("cy", (h + oR) / 3)
+    .attr("cy", (h1 + oR) / 3)
     .style("fill", function(d, i) {
         return colVals(i);
     }) // #1f77b4
@@ -134,7 +134,7 @@ bubbleObj.append("text")
     .attr("x", function(d, i) {
         return oR * (3 * (1 + i) - 1);
     })
-    .attr("y", (h + oR) / 3)
+    .attr("y", (h1 + oR) / 3)
     .style("fill", function(d, i) {
         return colVals(i);
     }) // #1f77b4
@@ -167,7 +167,7 @@ for (var iB = 0; iB < nTop; iB++) {
             return (oR * (3 * (iB + 1) - 1) + oR * 1.5 * Math.cos((i - 1) * 45 / 180 * Math.PI));
         })
         .attr("cy", function(d, i) {
-            return ((h + oR) / 3 + oR * 1.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
+            return ((h1 + oR) / 3 + oR * 1.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
         })
         .attr("cursor", "pointer")
         .style("opacity", 0.5)
@@ -196,7 +196,7 @@ for (var iB = 0; iB < nTop; iB++) {
             return (oR * (3 * (iB + 1) - 1) + oR * 1.5 * Math.cos((i - 1) * 45 / 180 * Math.PI));
         })
         .attr("y", function(d, i) {
-            return ((h + oR) / 3 + oR * 1.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
+            return ((h1 + oR) / 3 + oR * 1.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
         })
         .style("opacity", 0.5)
         .attr("text-anchor", "middle")
@@ -217,18 +217,17 @@ for (var iB = 0; iB < nTop; iB++) {
 }
 
 
-
 resetBubbles = function() {
-    w = 1100;
-    oR = w / (1 + 3 * nTop);
+    w1 = 1200;
+    oR = w1 / (1 + 3 * nTop);
 
-    h = Math.ceil(w / nTop * 2);
-    svgContainer.style("height", h + "px");
+    h = Math.ceil(w1 / nTop * 2);
+    svgContainer.style("height", h1 + "px");
 
-    mainNote.attr("y", h - 15);
+    mainNote.attr("y", h1 - 15);
 
-    svg.attr("width", w);
-    svg.attr("height", h);
+    svg.attr("width", w1);
+    svg.attr("height", h1);
 
     d3.select("#bubbleItemNote").text(defaultText);
 
@@ -242,14 +241,14 @@ resetBubbles = function() {
         .attr("cx", function(d, i) {
             return oR * (3 * (1 + i) - 1);
         })
-        .attr("cy", (h + oR) / 3);
+        .attr("cy", (h1 + oR) / 3);
 
     t.selectAll(".topBubbleText")
         .attr("font-size", 30)
         .attr("x", function(d, i) {
             return oR * (3 * (1 + i) - 1);
         })
-        .attr("y", (h + oR) / 3);
+        .attr("y", (h1 + oR) / 3);
 
     for (var k = 0; k < nTop; k++) {
         t.selectAll(".childBubbleText" + k)
@@ -257,7 +256,7 @@ resetBubbles = function() {
                 return (oR * (3 * (k + 1) - 1) + oR * 1.5 * Math.cos((i - 1) * 45 / 180 * Math.PI));
             })
             .attr("y", function(d, i) {
-                return ((h + oR) / 3 + oR * 1.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
+                return ((h1 + oR) / 3 + oR * 1.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
             })
             .attr("font-size", 6)
             .style("opacity", 0.5);
@@ -271,7 +270,7 @@ resetBubbles = function() {
                 return (oR * (3 * (k + 1) - 1) + oR * 1.5 * Math.cos((i - 1) * 45 / 180 * Math.PI));
             })
             .attr("cy", function(d, i) {
-                return ((h + oR) / 3 + oR * 1.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
+                return ((h1 + oR) / 3 + oR * 1.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
             });
     }
 }
@@ -336,7 +335,7 @@ function activateBubble(d, i) {
                 return (oR * (3 * (k + 1) - 1) - 0.6 * oR * (k - 1) + signSide * oR * 2.5 * Math.cos((i - 1) * 45 / 180 * Math.PI));
             })
             .attr("y", function(d, i) {
-                return ((h + oR) / 3 + signSide * oR * 2.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
+                return ((h1 + oR) / 3 + signSide * oR * 2.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
             })
             .attr("font-size", function() {
                 return (k == i) ? 12 : 6;
@@ -350,7 +349,7 @@ function activateBubble(d, i) {
                 return (oR * (3 * (k + 1) - 1) - 0.6 * oR * (k - 1) + signSide * oR * 2.5 * Math.cos((i - 1) * 45 / 180 * Math.PI));
             })
             .attr("cy", function(d, i) {
-                return ((h + oR) / 3 + signSide * oR * 2.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
+                return ((h1 + oR) / 3 + signSide * oR * 2.5 * Math.sin((i - 1) * 45 / 180 * Math.PI));
             })
             .attr("r", function() {
                 return (k == i) ? (oR * 0.55) : (oR / 3.0);

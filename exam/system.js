@@ -5,7 +5,6 @@ script.type = 'text/javascript';
 script.defer = true;
 document.getElementsByTagName('head').item(0).appendChild(script);
 
-
 var w = 1200, h = 1200;
 var t0 = Date.now();
 
@@ -109,7 +108,7 @@ container.selectAll("g.planet").data(data).enter().append("g")
     .on('mouseout',function(){
         tip.hide();
         tip2.hide();
-    })    
+    })
     .attr("class", "planet").each(function(d, i) {
     //d3.select(this).append("circle").attr("class", "orbit")
     //  .attr("r", d['P. Mean Distance (AU)']*1000);
