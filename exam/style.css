@@ -12,15 +12,32 @@
 
 #visualization .container {
   position : relative;
-  max-width: 1500px;
+  max-width: 1800px;
+  width : 1500px;
 }
 
-#story-text {
+.container {
+  width: 1400px;
+  max-width: 1800px;
+}
+
+.image-wrapper {
+  width : 650px;
+  float : left;
+  padding-right: 25px;
+  padding-bottom: 10px;
+}
+.image-wrapper img{
+  width : 100%;
+}
+
+/*#story-text {
   vertical-align: middle;
   font-size: 26px;
   line-height: 140%;
   display: table-cell;
 }
+
 
 #story-text {
   width: 70%;
@@ -28,7 +45,24 @@
   margin-left: 15%;
   margin-right: 15%;
 }
+*/
 
+#col-md-6{
+  width:1500px;
+}
+
+/*#planetarium{
+  width: 1800px;
+  max-width:  = 1800px;
+  position : relative;
+
+}
+
+#planetarium .container{
+  width: 1400;
+  background: center center no-repeat;
+}
+*/
 #intro-header {
   background: center center no-repeat;
   -webkit-background-size: cover;
