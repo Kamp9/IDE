@@ -145,26 +145,56 @@ svg.call(tip2);
 var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")");
 
-container.selectAll("g.planet").data(data).enter().append("g")
-    // .on('mouseenter', suntip.show)
-    .on('mouseenter', function(d){
-        tip.show(d);
-        tip2.show(d);
-    })
-    .on('mouseover',function(d){
-        sun_size = d['S. Radius (SU)'] *100;
-        sun_global_img.attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size);
-    })
-    .on('mouseout',function(){
-        tip.hide();
-        tip2.hide();
-    })
-    .attr("class", "planet").each(function(d, i) {
-    //d3.select(this).append("circle").attr("class", "orbit")
-    //  .attr("r", d['P. Mean Distance (AU)']*1000);
-    d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",d['P. Mean Distance (AU)']*900)
-      .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], t_min, t_max)))
-  });
+// if (use_dataset == 1) {
+//     var use_data = data;
+// }
+// if (use_dataset == 2) {
+//     var use_data = data2;
+// }
+// if (use_dataset == 3) {
+//     var use_data = data3;
+// }
+
+d3.timer(function() {
+    first_iteration = true;
+    var privouse_use_data = 1;
+
+    if (use_dataset != privouse_use_data || first_iteration){
+        first_iteration = false;
+        if (use_dataset == 1) {
+            var use_data = data;
+        }
+        if (use_dataset == 2) {
+            var use_data = data2;
+        }
+        if (use_dataset == 3) {
+            var use_data = data3;
+        }
+        container.selectAll("g.planet").remove();
+        container.selectAll("g.planet").data(use_data).enter().append("g")
+        // .on('mouseenter', suntip.show)
+            .on('mouseenter', function(d){
+                tip.show(d);
+                tip2.show(d);
+            })
+            .on('mouseover',function(d){
+                sun_size = d['S. Radius (SU)'] *100;
+                sun_global_img.attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size);
+            })
+            .on('mouseout',function(){
+                tip.hide();
+                tip2.hide();
+            })
+            .attr("class", "planet").each(function(d, i) {
+            //d3.select(this).append("circle").attr("class", "orbit")
+            //  .attr("r", d['P. Mean Distance (AU)']*1000);
+            d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",d['P. Mean Distance (AU)']*900)
+                .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], t_min, t_max)))
+        });
+    }
+    first_iteration = false;
+}, 0.5);
+
 
 
 

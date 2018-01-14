@@ -1,22 +1,25 @@
 var defaultText = "Change Data";
 
+var use_dataset = 1;
+
 var root = {
-    "name": "bubble",
-    "children": [{
+        "name": "bubble",
+        "children": [{
         "name": "Dataset",
-        "description": "Dataset",
+        "note": "Click here to see more information about the whole dataset",
         "address": "http://phl.upr.edu/projects/habitable-exoplanets-catalog/data/database",
         "children": [{
-            "name": "Habitable Plan",
-            "address": "http://sunsp.net/portfolio.html",
-            "note": "Global crop geography, including precipitation, temperature, crop area, etc."
+            "name": "Data1",
+            "num": "1",
+            "note": "Data1"
         }, {
-            "name": "Crop Land",
-            "address": "http://sunsp.net/portfolio.html"
+            "name": "Data2",
+            "num": "2",
+            "note": "Data2"
         }, {
-            "name": "Crop Yields",
-            "address": "http://sunsp.net/portfolio.html",
-            "note": "Maize, wheat, rice, and soybean yields in 2000"
+            "name": "Data3",
+            "num": "3",
+            "note": "Data3"
         }]
     }, {
         "name": "AgLab",
@@ -95,7 +98,9 @@ var bubbleObj = svg.selectAll(".topBubble")
     .enter().append("g")
     .attr("id", function(d, i) {
         return "topBubbleAndText_" + i
-    });
+    })
+    .on("click", function(d, i) {
+        window.open(d.address);})
 
 console.log(root);
 nTop = root.children.length;
@@ -171,7 +176,7 @@ for (var iB = 0; iB < nTop; iB++) {
         .style("opacity", 0.5)
         .style("fill", "#eee")
         .on("click", function(d, i) {
-            window.open(d.address);
+            use_dataset = d.num;
         })
         .on("mouseover", function(d, i) {
             //window.alert("say something");
