@@ -115,7 +115,7 @@ container.selectAll("g.planet").data(data).enter().append("g")
     .attr("class", "planet").each(function(d, i) {
     //d3.select(this).append("circle").attr("class", "orbit")
     //  .attr("r", d['P. Mean Distance (AU)']*1000);
-    d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",d['Norm Distance']*h/2)
+    d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",(0.05+d['Norm Distance'])*h/2)
       .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], t_min, t_max)))
   });
 
