@@ -3,10 +3,11 @@ var defaultText = "Change Data";
 var root = {
     "name": "bubble",
     "children": [{
-        "name": "Atlas",
-        "description": "Atlas of Global Agriculture",
+        "name": "Dataset",
+        "description": "Dataset",
+        "address": "http://phl.upr.edu/projects/habitable-exoplanets-catalog/data/database",
         "children": [{
-            "name": "Geography",
+            "name": "Habitable Plan",
             "address": "http://sunsp.net/portfolio.html",
             "note": "Global crop geography, including precipitation, temperature, crop area, etc."
         }, {
@@ -61,7 +62,7 @@ var root = {
     }]
 };
 
-var w1 = 1200;
+var w1 = 1370;
 var h1 = Math.ceil(w1 * 0.5);
 var oR = 0;
 var nTop = 0;
@@ -210,12 +211,11 @@ for (var iB = 0; iB < nTop; iB++) {
         .on("click", function(d, i) {
             window.open(d.address);
         });
-
 }
 
 
 resetBubbles = function() {
-    w1 = 1200;
+    w1 = 1370;
     oR = w1 / (1 + 3 * nTop);
 
     h1 = Math.ceil(w1 / nTop * 2);
