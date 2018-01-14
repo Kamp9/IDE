@@ -5,7 +5,7 @@ script.type = 'text/javascript';
 script.defer = true;
 document.getElementsByTagName('head').item(0).appendChild(script);
 
-var w = 1200, h = 1200;
+var w = 1370, h = 1200;
 var t0 = Date.now();
 
 var slowdown = 1;
