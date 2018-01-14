@@ -119,6 +119,7 @@ container.selectAll("g.planet").data(data).enter().append("g")
       .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], t_min, t_max)))
   });
 
+d3.select("g.planet").append("circle").attr("class","orbit").attr("r",0.73*h/2).attr("fill","none").attr("stroke","#ffffff");
 
 
 var speed = 0;
