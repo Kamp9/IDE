@@ -12,6 +12,55 @@ var slowdown = 1;
 var sun_global_img = null;
 
 
+d3.csv("planets.csv",function(error, data2) {
+    if (error) throw error;
+    var t_min2 = Infinity;
+    var t_max2 = 0;
+    data2.forEach(function(d2){
+        d2['P. Mass (EU)'] = + d2['P. Mass (EU)']
+        d2['P. Gravity (EU)'] = + d2['P. Gravity (EU)']
+        d2['P. Disc. Year'] = + d2['P. Disc. Year']
+        d2['P. Habitable'] = + d2['P. Habitable']
+        d2['P. Radius (EU)'] = + d2['P. Radius (EU)']
+        d2['P. Ts Mean (K)'] = + d2['P. Ts Mean (K)']
+        d2['P. Mean Distance (AU)'] = + d2['P. Mean Distance (AU)']
+        d2['P. Period (days)'] = + d2['P. Period (days)']
+        d2['S. Mass (SU)'] = + d2['S. Mass (SU)']
+        d2['S. Radius (SU)'] = + d2['S. Radius (SU)']
+        d2.phi0 = 190
+        if (d2['P. Ts Mean (K)'] > t_max2) {
+            t_max2 = d2['P. Ts Mean (K)'];
+        }
+        if (d2['P. Ts Mean (K)'] < t_min2) {
+            t_min2 = d2['P. Ts Mean (K)'];
+        }
+    });
+
+    d3.csv("planets2.csv",function(error, data3) {
+        if (error) throw error;
+        var t_min3 = Infinity;
+        var t_max3 = 0;
+        data3.forEach(function(d3){
+            d3['P. Mass (EU)'] = + d3['P. Mass (EU)']
+            d3['P. Gravity (EU)'] = + d3['P. Gravity (EU)']
+            d3['P. Disc. Year'] = + d3['P. Disc. Year']
+            d3['P. Habitable'] = + d3['P. Habitable']
+            d3['P. Radius (EU)'] = + d3['P. Radius (EU)']
+            d3['P. Ts Mean (K)'] = + d3['P. Ts Mean (K)']
+            d3['P. Mean Distance (AU)'] = + d3['P. Mean Distance (AU)']
+            d3['P. Period (days)'] = + d3['P. Period (days)']
+            d3['S. Mass (SU)'] = + d3['S. Mass (SU)']
+            d3['S. Radius (SU)'] = + d3['S. Radius (SU)']
+            d3.phi0 = 190
+            if (d3['P. Ts Mean (K)'] > t_max3) {
+                t_max3 = d3['P. Ts Mean (K)'];
+            }
+            if (d3['P. Ts Mean (K)'] < t_min3) {
+                t_min3 = d3['P. Ts Mean (K)'];
+            }
+        });
+
+
 d3.csv("habit_planets.csv",function(error, data) {
   if (error) throw error;
   var t_min = Infinity;
@@ -134,4 +183,4 @@ d3.timer(function() {
   });
 });
 
-});
+})})});
