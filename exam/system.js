@@ -202,7 +202,7 @@ d3.timer(function() {
                 .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], t_min, t_max)))
         });
 
-        d3.select("g.planet").append("circle").attr("class","orbit").attr("r",0.73*h/2).attr("fill","none").attr("stroke","#ffffff");
+        d3.select("g.planet").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
     }
     first_iteration = false;
 });
