@@ -12,6 +12,7 @@ var t0 = Date.now();
 var slowdown = 1;
 var sun_global_img = null;
 
+var num_planets = 25;
 var use_dataset = 1;
 
 d3.csv("planets.csv",function(error, data2) {
@@ -100,7 +101,7 @@ var svgslider = d3.select("#svgslider"),
     height = +svgslider.attr("height");
 
 var x = d3.scaleLinear()
-    .domain([0, 180])
+    .domain([1, num_planets])
     .range([0, width])
     .clamp(true);
 
@@ -118,7 +119,7 @@ slider.append("line")
     .attr("class", "track-overlay")
     .call(d3.drag()
         .on("start.interrupt", function() { slider.interrupt(); })
-        .on("start drag", function() { hue(x.invert(d3.event.x)); }));
+        .on("start drag", function() { select_planets(x.invert(d3.event.x)); }));
 
 slider.insert("g", ".track-overlay")
     .attr("class", "ticks")
@@ -134,16 +135,17 @@ var handle = slider.insert("circle", ".track-overlay")
     .attr("class", "handle")
     .attr("r", 9);
 
-slider.transition() // Gratuitous intro!
-    .duration(750)
-    .tween("hue", function() {
-        var i = d3.interpolate(0, 70);
-        return function(t) { hue(i(t)); };
-    });
+// slider.transition() // Gratuitous intro!
+//     .duration(750)
+//     .tween("hue", function() {
+//         var i = d3.interpolate(0, 70);
+//         return function(t) { hue(i(t)); };
+//     });
 
-function hue(h) {
+function select_planets(h) {
     handle.attr("cx", x(h));
-    svgslider.style("background-color", d3.hsl(h, 0.8, 0.8));
+    num_planets = Math.floor(h);
+    // svgslider.style("background-color", d3.hsl(h, 0.8, 0.8));
 }
 
 
@@ -204,10 +206,14 @@ svg.call(tip2);
 var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")");
 
+
+// filter(function(d, i) { return i < num_planets})
 var first_iteration = true;
-var privouse_use_data = use_dataset;
+var last_num = num_planets;
+var last_use_data = use_dataset;
+
 d3.timer(function() {
-    if (use_dataset != privouse_use_data || first_iteration){
+    if (use_dataset != last_use_data || first_iteration || (last_num !== num_planets)){
         first_iteration = false;
         if (use_dataset == 1) {
             var use_min = t_min;
@@ -225,11 +231,10 @@ d3.timer(function() {
             var use_data = data3;
         }
         console.log(use_data);
-        privouse_use_data = use_dataset;
+        last_use_data = use_dataset;
 
         container.selectAll("g.planet").remove();
-        container.selectAll("g.planet").data(use_data).enter().append("g")
-        // .on('mouseenter', suntip.show)
+        container.selectAll("g.planet").data(use_data).enter().append("g").filter(function(d, i) { return i < num_planets})
             .on('mouseenter', function(d){
                 tip.show(d);
                 tip2.show(d);
@@ -251,6 +256,7 @@ d3.timer(function() {
         first_iteration = false;
     }
 });
+
 
 
 
