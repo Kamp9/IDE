@@ -5,15 +5,12 @@ script.type = 'text/javascript';
 script.defer = true;
 document.getElementsByTagName('head').item(0).appendChild(script);
 
-// include the d3.slider.js file
-// var script2  = document.createElement('script2');
-// script2.src  = "d3.slider.js";
-// script2.type = 'text/javascript';
-// script2.defer = true;
-// document.getElementsByTagName('head').item(0).appendChild(script2);
+var slider = document.createElement('slider');
+slider.src = "slider.js";
+slider.defer = true;
+document.getElementsByTagName('head').item(0).appendChild(slider);
 
-// d3.slider = require('d3.slider');
-// require('!style!css!d3.slider/d3.slider.css');
+console.log(slider);
 
 var w = 1370, h = 1200;
 var t0 = Date.now();
@@ -38,6 +35,7 @@ d3.csv("planets.csv",function(error, data2) {
         d['P. Period (days)'] = + d['P. Period (days)']
         d['S. Mass (SU)'] = + d['S. Mass (SU)']
         d['S. Radius (SU)'] = + d['S. Radius (SU)']
+        d['Norm Distance'] = + d['Norm Distance']
         d.phi0 = 190
         if (d['P. Ts Mean (K)'] > t_max2) {
             t_max2 = d['P. Ts Mean (K)'];
@@ -62,6 +60,8 @@ d3.csv("planets.csv",function(error, data2) {
             d['P. Period (days)'] = + d['P. Period (days)']
             d['S. Mass (SU)'] = + d['S. Mass (SU)']
             d['S. Radius (SU)'] = + d['S. Radius (SU)']
+            d['Norm Distance'] = + d['Norm Distance']
+
             d.phi0 = 190
             if (d['P. Ts Mean (K)'] > t_max3) {
                 t_max3 = d['P. Ts Mean (K)'];
@@ -87,7 +87,7 @@ d3.csv("habit_planets.csv",function(error, data) {
     d['P. Period (days)'] = + d['P. Period (days)']
     d['S. Mass (SU)'] = + d['S. Mass (SU)']
     d['S. Radius (SU)'] = + d['S. Radius (SU)']
-    d['Norm Distance'] = + d['Norm Distance']
+      d['Norm Distance'] = + d['Norm Distance']
     tmp = Math.floor((Math.random() * 36) + 1)*10;
     console.log(tmp);
     d.phi0 = tmp;
@@ -109,14 +109,10 @@ function calculateColor(t, min_t, max_t) {
     return d3.rgb(Math.floor(r), Math.floor(g), Math.floor(b));
 }
 
-// FUN TIME
-// var timeSlider =  d3.select('#slider7').call(d3.slider().axis(true).min(1970).max(2000).step(1));
-//     timeSlider.call(d3.slider().on("slide", function(evt, value) {
-//         // `value` is the percentage travelled on the slider
-//         // Selected year will therefore be value * (max - min) + min
-//         var year = value/100 * (2000-1970) + 1970;
-//         console.log("The slider's current value is:" + year);
-//     }));
+//SLIDER
+// var slider = d3.slider().min(0).max(10).ticks(10).showRange(true).value(6);
+// // Render the slider in the div
+// d3.select('#slider').call(slider);
 
 
 
@@ -174,12 +170,18 @@ d3.timer(function() {
     if (use_dataset != privouse_use_data || first_iteration){
         first_iteration = false;
         if (use_dataset == 1) {
+            var use_min = t_min;
+            var use_max = t_max;
             var use_data = data;
         }
         if (use_dataset == 2) {
+            var use_min = t_min2;
+            var use_max = t_max2;
             var use_data = data2;
         }
         if (use_dataset == 3) {
+            var use_min = t_min3;
+            var use_max = t_max3;
             var use_data = data3;
         }
         privouse_use_data = use_dataset;
@@ -201,7 +203,7 @@ d3.timer(function() {
             })
             .attr("class", "planet").each(function(d, i) {
             d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",(0.05+d['Norm Distance'])*h/2)
-                .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], t_min, t_max)))
+                .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], use_min, use_max)))
         });
 
         d3.select("g.planet").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");

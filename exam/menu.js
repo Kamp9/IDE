@@ -100,7 +100,9 @@ var bubbleObj = svg.selectAll(".topBubble")
         return "topBubbleAndText_" + i
     })
     .on("click", function(d, i) {
-        window.open(d.address);})
+        // window.open(d.address);
+    })
+
 
 console.log(root);
 nTop = root.children.length;
@@ -214,7 +216,8 @@ for (var iB = 0; iB < nTop; iB++) {
             return d.name
         })
         .on("click", function(d, i) {
-            window.open(d.address);
+
+            // window.open(d.address);
         });
 }
 
