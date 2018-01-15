@@ -88,7 +88,9 @@ d3.csv("habit_planets.csv",function(error, data) {
     d['S. Mass (SU)'] = + d['S. Mass (SU)']
     d['S. Radius (SU)'] = + d['S. Radius (SU)']
     d['Norm Distance'] = + d['Norm Distance']
-    d.phi0 = 190
+    tmp = Math.floor((Math.random() * 36) + 1)*10;
+    console.log(tmp);
+    d.phi0 = tmp;
     if (d['P. Ts Mean (K)'] > t_max) {
         t_max = d['P. Ts Mean (K)'];
     }
@@ -96,7 +98,6 @@ d3.csv("habit_planets.csv",function(error, data) {
         t_min = d['P. Ts Mean (K)'];
     }
   });
-
 
 
 function calculateColor(t, min_t, max_t) {
