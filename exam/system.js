@@ -77,6 +77,7 @@ d3.csv("habit_planets.csv",function(error, data) {
     d['P. Period (days)'] = + d['P. Period (days)']
     d['S. Mass (SU)'] = + d['S. Mass (SU)']
     d['S. Radius (SU)'] = + d['S. Radius (SU)']
+    d['Norm Distance'] = + d['Norm Distance']
     d.phi0 = 190
     if (d['P. Ts Mean (K)'] > t_max) {
         t_max = d['P. Ts Mean (K)'];
@@ -145,20 +146,9 @@ svg.call(tip2);
 var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")");
 
-// if (use_dataset == 1) {
-//     var use_data = data;
-// }
-// if (use_dataset == 2) {
-//     var use_data = data2;
-// }
-// if (use_dataset == 3) {
-//     var use_data = data3;
-// }
-
+var first_iteration = true;
+var privouse_use_data = use_dataset;
 d3.timer(function() {
-    first_iteration = true;
-    var privouse_use_data = 1;
-
     if (use_dataset != privouse_use_data || first_iteration){
         first_iteration = false;
         if (use_dataset == 1) {
@@ -170,8 +160,9 @@ d3.timer(function() {
         if (use_dataset == 3) {
             var use_data = data3;
         }
-        container.selectAll("g.planet").remove();
-        container.selectAll("g.planet").data(use_data).enter().append("g")
+
+        // container.selectAll("g.planet").remove();
+        container.selectAll("g.planet").data(data).enter().append("g")
         // .on('mouseenter', suntip.show)
             .on('mouseenter', function(d){
                 tip.show(d);
@@ -186,15 +177,14 @@ d3.timer(function() {
                 tip2.hide();
             })
             .attr("class", "planet").each(function(d, i) {
-            //d3.select(this).append("circle").attr("class", "orbit")
-            //  .attr("r", d['P. Mean Distance (AU)']*1000);
-            d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",d['P. Mean Distance (AU)']*900)
+            d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",(0.05+d['Norm Distance'])*h/2)
                 .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], t_min, t_max)))
         });
+
+        d3.select("g.planet").append("circle").attr("class","orbit").attr("r",0.73*h/2).attr("fill","none").attr("stroke","#ffffff");
     }
     first_iteration = false;
-}, 0.5);
-
+});
 
 
 
@@ -203,9 +193,9 @@ d3.timer(function() {
   var delta = (Date.now() - t0);
   svg.selectAll(".planet").attr("transform", function(d) {
     if(slowdown==1){
-        speed += 0.12;
+        speed += 0.15;
     }else{
-        speed += 0.01;
+        speed += 0.02;
         
     }
     return "rotate(" + d.phi0 + speed * (1/d['P. Period (days)'])/2 + ")";
