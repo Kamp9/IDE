@@ -6,13 +6,14 @@ script.defer = true;
 document.getElementsByTagName('head').item(0).appendChild(script);
 
 // include the d3.slider.js file
-var script2  = document.createElement('script2');
-script2.src  = "d3.slider.js";
-script2.type = 'text/javascript';
-script2.defer = true;
-document.getElementsByTagName('head').item(0).appendChild(script2);
+// var script2  = document.createElement('script2');
+// script2.src  = "d3.slider.js";
+// script2.type = 'text/javascript';
+// script2.defer = true;
+// document.getElementsByTagName('head').item(0).appendChild(script2);
 
-
+// d3.slider = require('d3.slider');
+// require('!style!css!d3.slider/d3.slider.css');
 
 var w = 1370, h = 1200;
 var t0 = Date.now();
@@ -115,6 +116,7 @@ function calculateColor(t, min_t, max_t) {
 //         var year = value/100 * (2000-1970) + 1970;
 //         console.log("The slider's current value is:" + year);
 //     }));
+
 
 
 var svg = d3.select("#planetarium").insert("svg")
