@@ -94,7 +94,7 @@ d3.csv("habit_planets.csv",function(error, data) {
 
 
 // Create Slider
-var svgslider = d3.select("svgslider"),
+var svgslider = d3.select("#svgslider"),
     margin = {right: 50, left: 50},
     width = +svgslider.attr("width") - margin.left - margin.right,
     height = +svgslider.attr("height");
