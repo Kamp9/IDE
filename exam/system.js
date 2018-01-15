@@ -5,12 +5,6 @@ script.type = 'text/javascript';
 script.defer = true;
 document.getElementsByTagName('head').item(0).appendChild(script);
 
-var slider = document.createElement('slider');
-slider.src = "slider.js";
-slider.defer = true;
-document.getElementsByTagName('head').item(0).appendChild(slider);
-
-console.log(slider);
 
 var w = 1370, h = 1200;
 var t0 = Date.now();
@@ -100,6 +94,61 @@ d3.csv("habit_planets.csv",function(error, data) {
   });
 
 
+// Create Slider
+var svgslider = d3.select("svgslider"),
+    margin = {right: 50, left: 50},
+    width = +svgslider.attr("width") - margin.left - margin.right,
+    height = +svgslider.attr("height");
+
+var x = d3.scaleLinear()
+    .domain([0, 180])
+    .range([0, width])
+    .clamp(true);
+
+var slider = svgslider.append("g")
+    .attr("class", "slider")
+    .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
+
+slider.append("line")
+    .attr("class", "track")
+    .attr("x1", x.range()[0])
+    .attr("x2", x.range()[1])
+    .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+    .attr("class", "track-inset")
+    .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+    .attr("class", "track-overlay")
+    .call(d3.drag()
+        .on("start.interrupt", function() { slider.interrupt(); })
+        .on("start drag", function() { hue(x.invert(d3.event.x)); }));
+
+slider.insert("g", ".track-overlay")
+    .attr("class", "ticks")
+    .attr("transform", "translate(0," + 18 + ")")
+    .selectAll("text")
+    .data(x.ticks(10))
+    .enter().append("text")
+    .attr("x", x)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d + "°"; });
+
+var handle = slider.insert("circle", ".track-overlay")
+    .attr("class", "handle")
+    .attr("r", 9);
+
+slider.transition() // Gratuitous intro!
+    .duration(750)
+    .tween("hue", function() {
+        var i = d3.interpolate(0, 70);
+        return function(t) { hue(i(t)); };
+    });
+
+function hue(h) {
+    handle.attr("cx", x(h));
+    svgslider.style("background-color", d3.hsl(h, 0.8, 0.8));
+}
+
+
+
 function calculateColor(t, min_t, max_t) {
     var temp_range = 255.0 / (max_t - min_t);
     var temp_mean = (max_t + min_t) / 2.0;
@@ -109,13 +158,7 @@ function calculateColor(t, min_t, max_t) {
     return d3.rgb(Math.floor(r), Math.floor(g), Math.floor(b));
 }
 
-//SLIDER
-// var slider = d3.slider().min(0).max(10).ticks(10).showRange(true).value(6);
-// // Render the slider in the div
-// d3.select('#slider').call(slider);
-
-
-
+// Create Planetarium
 var svg = d3.select("#planetarium").insert("svg")
   .attr("width", w).attr("height", h)
   .on("mouseover",function(d){
@@ -132,7 +175,6 @@ svg.append("svg:image")
     .attr("xlink:href", "sun.png")
     .attr("id", "sun")
     .attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size).attr("class", "sun");
-
 
 sun_global_img = svg.select("#sun");
 
