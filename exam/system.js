@@ -147,7 +147,6 @@ function hue(h) {
 }
 
 
-
 function calculateColor(t, min_t, max_t) {
     var temp_range = 255.0 / (max_t - min_t);
     var temp_mean = (max_t + min_t) / 2.0;
