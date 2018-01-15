@@ -23,13 +23,14 @@ for i in dataTosave:
     elif temp[1] in my_names:
         habit += [temp]
     if len(temp) == len(extract):
-        allp += [temp]
+        allp.append(np.array(temp,dtype=object))
+
 
 allp2 = []
 for i in dataTosave2:
     temp = [number for number in i if number]
     if len(temp) == len(extract):
-        allp2 += [temp]
+        allp2.append(np.array(temp,dtype=object))
 
 tmp = np.array(habit)
 norm_habit = normalize(tmp[:, 9].reshape(1, -1), norm='max')
@@ -38,9 +39,30 @@ for i, e in enumerate(habit):
     e.append(tmp)
 
 allp_copy = allp[0]
-allp_copy.append('Norm Distance')
+allp_copy = np.append(allp_copy,'Norm Distance')
 
+
+tmp =  np.array(allp)
+eh = []
+tmp = np.array(allp,dtype=object)
+norm_allp = normalize(tmp[1:, 9].reshape(1, -1), norm='max')
+for i, e in enumerate(allp[1:]):
+    tmp_2 = norm_allp[0][i].astype('|S10')
+    eh.append(np.append(e,tmp_2))
+
+tmp =  np.array(allp2)
+eh2 = []
+tmp = np.array(allp,dtype=object)
+norm_allp = normalize(tmp[1:, 9].reshape(1, -1), norm='max')
+for i, e in enumerate(allp[1:]):
+    tmp_2 = norm_allp[0][i].astype('|S10')
+    eh2.append(np.append(e,tmp_2))
+
+
+# print [allp_copy] + eh
+# allp_copy = allp[0]
+# allp_copy.append('Norm Distance')
 
 np.savetxt("habit_planets.csv", [allp_copy] + habit, fmt='%s', delimiter=",")
-np.savetxt("planets.csv", allp, fmt='%s', delimiter=",")
-np.savetxt("planets2.csv", allp2, fmt='%s', delimiter=",")
+np.savetxt("planets.csv", [allp_copy] + eh, fmt='%s', delimiter=",")
+np.savetxt("planets2.csv", [allp_copy] + eh2, fmt='%s', delimiter=",")
