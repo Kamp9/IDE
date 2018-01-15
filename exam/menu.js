@@ -22,7 +22,7 @@ var root = {
             "note": "Data3"
         }]
     }, {
-        "name": "AgLab",
+        "name": "Temperature",
         "description": "Virtual Lab of Global Agriculture",
         "children": [{
             "name": "Excess Nutrient",
@@ -37,7 +37,7 @@ var root = {
             "address": "http://gli.environment.umn.edu"
         }]
     }, {
-        "name": "Nutshell",
+        "name": "Special Planets",
         "description": "Profiles of Country",
         "children": [{
             "name": "Efficiency",
@@ -50,7 +50,7 @@ var root = {
             "address": "http://environment.umn.edu"
         }]
     }, {
-        "name": "Data",
+        "name": "Extreme Planets",
         "description": "Crop Data in 5 minutes grid",
         "children": [{
             "name": "Geography",
@@ -174,7 +174,7 @@ for (var iB = 0; iB < nTop; iB++) {
         })
         .attr("cursor", "pointer")
         .style("opacity", 0.5)
-        .style("fill", "#eee")
+        .style("fill", "#6e90ee")
         .on("click", function(d, i) {
             use_dataset = d.num;
         })

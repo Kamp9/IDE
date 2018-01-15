@@ -5,6 +5,15 @@ script.type = 'text/javascript';
 script.defer = true;
 document.getElementsByTagName('head').item(0).appendChild(script);
 
+// include the d3.slider.js file
+var script2  = document.createElement('script2');
+script2.src  = "d3.slider.js";
+script2.type = 'text/javascript';
+script2.defer = true;
+document.getElementsByTagName('head').item(0).appendChild(script2);
+
+
+
 var w = 1370, h = 1200;
 var t0 = Date.now();
 
@@ -88,6 +97,7 @@ d3.csv("habit_planets.csv",function(error, data) {
   });
 
 
+
 function calculateColor(t, min_t, max_t) {
     var temp_range = 255.0 / (max_t - min_t);
     var temp_mean = (max_t + min_t) / 2.0;
@@ -96,6 +106,15 @@ function calculateColor(t, min_t, max_t) {
     var b = 255 - Math.abs(min_t - t) * temp_range;
     return d3.rgb(Math.floor(r), Math.floor(g), Math.floor(b));
 }
+
+// FUN TIME
+// var timeSlider =  d3.select('#slider7').call(d3.slider().axis(true).min(1970).max(2000).step(1));
+//     timeSlider.call(d3.slider().on("slide", function(evt, value) {
+//         // `value` is the percentage travelled on the slider
+//         // Selected year will therefore be value * (max - min) + min
+//         var year = value/100 * (2000-1970) + 1970;
+//         console.log("The slider's current value is:" + year);
+//     }));
 
 
 var svg = d3.select("#planetarium").insert("svg")
