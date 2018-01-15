@@ -83,7 +83,6 @@ d3.csv("habit_planets.csv",function(error, data) {
     d['S. Radius (SU)'] = + d['S. Radius (SU)']
       d['Norm Distance'] = + d['Norm Distance']
     tmp = Math.floor((Math.random() * 36) + 1)*10;
-    console.log(tmp);
     d.phi0 = tmp;
     if (d['P. Ts Mean (K)'] > t_max) {
         t_max = d['P. Ts Mean (K)'];
@@ -226,6 +225,7 @@ d3.timer(function() {
             var use_max = t_max3;
             var use_data = data3;
         }
+        console.log(use_data);
         privouse_use_data = use_dataset;
 
         container.selectAll("g.planet").remove();
