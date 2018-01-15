@@ -181,9 +181,10 @@ d3.timer(function() {
         if (use_dataset == 3) {
             var use_data = data3;
         }
+        privouse_use_data = use_dataset;
 
-        // container.selectAll("g.planet").remove();
-        container.selectAll("g.planet").data(data).enter().append("g")
+        container.selectAll("g.planet").remove();
+        container.selectAll("g.planet").data(use_data).enter().append("g")
         // .on('mouseenter', suntip.show)
             .on('mouseenter', function(d){
                 tip.show(d);
@@ -203,8 +204,8 @@ d3.timer(function() {
         });
 
         d3.select("g.planet").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
+        first_iteration = false;
     }
-    first_iteration = false;
 });
 
 
