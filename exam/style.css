@@ -32,21 +32,23 @@
   width : 100%;
 }
 
-/*#story-text {
+/*#norm-text {
   vertical-align: middle;
   font-size: 26px;
   line-height: 140%;
   display: table-cell;
 }
-
-
-#story-text {
-  width: 70%;
-  text-align: center;
-  margin-left: 15%;
-  margin-right: 15%;
-}
 */
+
+#norm-text {
+  text-align: justify;
+  width : 700px;
+  padding-left : 50px;
+  padding-right : 50px;
+  /*margin-left: 5%;*/
+  /*margin-right: 5%;*/
+}
+
 
 #col-md-6{
   width:1500px;
@@ -106,7 +108,7 @@
 body {
   font-family: "Avenir Next", "Helvetica", sans-serif;
   background-color: rgb(250, 250, 255);
-  font-size: 26px;
+  font-size: 24px;
   line-height: 140%;
   /*background-image: url("Space_website_background_by_leftyfencer.jpg");*/
   /*background-repeat: no-repeat;*/
