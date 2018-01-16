@@ -4,7 +4,7 @@ var t0 = Date.now();
 var slowdown = 1;
 var sun_global_img = null;
 
-var num_planets = 25;
+var num_planets = 50;
 
 d3.csv("planets.csv",function(error, data2) {
     if (error) throw error;
@@ -92,7 +92,7 @@ var svgslider = d3.select("#svgslider"),
     height = +svgslider.attr("height");
 
 var x = d3.scaleLinear()
-    .domain([1, num_planets])
+    .domain([1, d3.selectAll(data).size()]) // sets width. may work for other datasets. time will show
     .range([0, width])
     .clamp(true);
 
@@ -120,26 +120,29 @@ slider.insert("g", ".track-overlay")
     .enter().append("text")
     .attr("x", x)
     .attr("text-anchor", "middle")
-    .text(function(d) { return d + "°"; });
+    .text(function(d) { return d ; });
 
 var handle = slider.insert("circle", ".track-overlay")
     .attr("class", "handle")
-    .attr("r", 9);
+    .attr("r", 9)
+    .attr("cx",x(d3.selectAll(data).size()));
 
-// slider.transition() // Gratuitous intro!
-//     .duration(750)
-//     .tween("hue", function() {
-//         var i = d3.interpolate(0, 70);
-//         return function(t) { hue(i(t)); };
-//     });
 
+slider_mode = 1;
 function select_planets(h) {
     num_planets = Math.floor(h);
-    
-    container.selectAll("g.planet").filter(function(d, i) { return i < num_planets}).attr("opacity",1)
-    container.selectAll("g.planet").filter(function(d, i) { return i >= num_planets}).attr("opacity",0)
+    switch(slider_mode) {
+    case 0:
+        container.selectAll("g.planet").filter(function(d, i) { return i < num_planets}).attr("opacity",1)
+        container.selectAll("g.planet").filter(function(d, i) { return i >= num_planets}).attr("opacity",0)
+        break;
+    case 1:
+        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] < h/d3.selectAll(data).size()}).attr("opacity",1)
+        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] > h/d3.selectAll(data).size()}).attr("opacity",0)
+        break;
+    default:
+    }
 
-    // if(d3.select(this).attr("opacity") ==1){
 
     handle.attr("cx", x(h));
     // svgslider.style("background-color", d3.hsl(h, 0.8, 0.8));
@@ -223,18 +226,24 @@ function change_dataset(use_dataset) {
         use_data = data3;
     }
     container.selectAll("g.planet").remove();
-    container.selectAll("g.planet").data(use_data).enter().append("g").filter(function(d, i) { return i < num_planets})
+    container.selectAll("g.planet").data(use_data).enter().append("g")
         .on('mouseenter', function(d){
+        if(d3.select(this).attr("opacity") ==1){    
             tip.show(d);
             tip2.show(d);
+        }
         })
         .on('mouseover',function(d){
-            sun_size = d['S. Radius (SU)'] *100;
-            sun_global_img.attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size);
+            if(d3.select(this).attr("opacity") ==1){    
+                sun_size = d['S. Radius (SU)'] *100;
+                sun_global_img.attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size);
+            }
         })
         .on('mouseout',function(){
-            tip.hide();
-            tip2.hide();
+            if(d3.select(this).attr("opacity") ==1){    
+                tip.hide();
+                tip2.hide();
+            }
         })
         .attr("class", "planet").each(function(d, i) {
         d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",(0.05+d['Norm Distance'])*h/2)
