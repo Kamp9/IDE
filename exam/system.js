@@ -6,6 +6,17 @@ var sun_global_img = null;
 
 var num_planets = 50;
 
+slider_mode = 0;
+function slider_changer(inp){
+ 
+    slider_mode = inp;
+}
+
+current_data = 1;
+function data_changer(inp){
+    change_dataset(inp);
+}
+
 d3.csv("planets.csv",function(error, data2) {
     if (error) throw error;
     var t_min2 = Infinity;
@@ -128,7 +139,7 @@ var handle = slider.insert("circle", ".track-overlay")
     .attr("cx",x(d3.selectAll(data).size()));
 
 
-slider_mode = 1;
+
 function select_planets(h) {
     num_planets = Math.floor(h);
     switch(slider_mode) {
@@ -226,6 +237,7 @@ change_dataset(1);
 
 
 function change_dataset(use_dataset) {
+    use_dataset = current_data;
     if (use_dataset === 1) {
         use_min = t_min;
         use_max = t_max;
@@ -243,6 +255,7 @@ function change_dataset(use_dataset) {
     }
     container.selectAll("g.planet").remove();
     container.selectAll("g.planet").data(use_data).enter().append("g")
+        .attr("opacity",1)
         .on('mouseenter', function(d){
         if(d3.select(this).attr("opacity") ==1){    
             tip.show(d);

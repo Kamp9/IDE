@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="d3-tip.js"></script>
+    <script type="text/javascript" src="system.js"></script>
 
 
 
@@ -25,11 +26,6 @@
       </div>
     </header>
 
-    <!--<a href="https://stackoverflow.com/questions/14872687/how-to-rotate-an-object-around-the-center-in-d3-js">https://stackoverflow.com/questions/14872687/how-to-rotate-an-object-around-the-center-in-d3-js</a>-->
-    <!--<br>-->
-    <!--<a href="http://jsfiddle.net/xameeramir/zcgLybpd/">http://jsfiddle.net/xameeramir/zcgLybpd</a>-->
-    <!--<br>-->
-    <!--<a href="https://bl.ocks.org/mbostock/6452972">https://bl.ocks.org/mbostock/6452972</a>-->
 
 <div id  = "visualization" class = "container">
     <div class = "row">
@@ -70,15 +66,30 @@
 <div id="sse50">
     <div id="sses50">
         <ul>
-            <li><a href="?menu=50&skin=2&p=Javascript-Menus">Javascript Menus</a></li>
+            <button onclick="data_changer(2)" class="dropbtn">Dropdown</button>
             <li><a href="?menu=50&skin=2&p=Horizontal-Menus">Horizontal Menus</a></li>
-            <li><a href="?menu=50&skin=2&p=Web-Menus">Web Menus</a></li>
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Sort</button>
+   <div id="myDropdown" class="dropdown-content">
+    <button onclick="slider_changer(0)" class="dropbtn">By id</button>
+    <button onclick="slider_changer(1)" class="dropbtn">By distance</button>
+    <a href="#">Link 3</a>
+  </div>
+
         </ul>
     </div>
 </div>
 
+
+
 <div id = "planetarium" style="background-image: url('background2.jpg')" >
-    <script type="text/javascript" src="system.js"></script>
+</div>
+<script>
+    function myFunction(){
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+</script>
+
 </div>
 </div>
 
