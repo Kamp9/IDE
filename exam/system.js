@@ -1,11 +1,3 @@
-// include the menu.js file
-var script  = document.createElement('script');
-script.src  = "menu.js";
-script.type = 'text/javascript';
-script.defer = true;
-document.getElementsByTagName('head').item(0).appendChild(script);
-
-
 var w = 1370, h = 1200;
 var t0 = Date.now();
 
@@ -13,7 +5,6 @@ var slowdown = 1;
 var sun_global_img = null;
 
 var num_planets = 25;
-var use_dataset = 1;
 
 d3.csv("planets.csv",function(error, data2) {
     if (error) throw error;
@@ -206,57 +197,95 @@ svg.call(tip2);
 var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")");
 
+change_dataset(1);
 
-// filter(function(d, i) { return i < num_planets})
-var first_iteration = true;
-var last_num = num_planets;
-var last_use_data = use_dataset;
+var use_min = t_min;
+var use_max = t_max;
+var use_data = data;
 
-d3.timer(function() {
-    if (use_dataset != last_use_data || first_iteration || (last_num !== num_planets)){
-        first_iteration = false;
-        if (use_dataset == 1) {
-            var use_min = t_min;
-            var use_max = t_max;
-            var use_data = data;
-        }
-        if (use_dataset == 2) {
-            var use_min = t_min2;
-            var use_max = t_max2;
-            var use_data = data2;
-        }
-        if (use_dataset == 3) {
-            var use_min = t_min3;
-            var use_max = t_max3;
-            var use_data = data3;
-        }
-        console.log(use_data);
-        last_use_data = use_dataset;
-
-        container.selectAll("g.planet").remove();
-        container.selectAll("g.planet").data(use_data).enter().append("g").filter(function(d, i) { return i < num_planets})
-            .on('mouseenter', function(d){
-                tip.show(d);
-                tip2.show(d);
-            })
-            .on('mouseover',function(d){
-                sun_size = d['S. Radius (SU)'] *100;
-                sun_global_img.attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size);
-            })
-            .on('mouseout',function(){
-                tip.hide();
-                tip2.hide();
-            })
-            .attr("class", "planet").each(function(d, i) {
-            d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",(0.05+d['Norm Distance'])*h/2)
-                .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], use_min, use_max)))
-        });
-
-        d3.select("g.planet").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
-        first_iteration = false;
+function change_dataset(use_dataset) {
+    if (use_dataset === 1) {
+        use_min = t_min;
+        use_max = t_max;
+        use_data = data;
     }
-});
+    if (use_dataset === 2) {
+        use_min = t_min2;
+        use_max = t_max2;
+        use_data = data2;
+    }
+    if (use_dataset === 3) {
+        use_min = t_min3;
+        use_max = t_max3;
+        use_data = data3;
+    }
+    container.selectAll("g.planet").remove();
+    container.selectAll("g.planet").data(use_data).enter().append("g").filter(function(d, i) { return i < num_planets})
+        .on('mouseenter', function(d){
+            tip.show(d);
+            tip2.show(d);
+        })
+        .on('mouseover',function(d){
+            sun_size = d['S. Radius (SU)'] *100;
+            sun_global_img.attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size);
+        })
+        .on('mouseout',function(){
+            tip.hide();
+            tip2.hide();
+        })
+        .attr("class", "planet").each(function(d, i) {
+        d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",(0.05+d['Norm Distance'])*h/2)
+            .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], use_min, use_max)))
+    });
 
+    d3.select("g.planet").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
+}
+
+
+// d3.timer(function() {
+//     if (use_dataset != last_use_data || first_iteration || (last_num !== num_planets)){
+//         first_iteration = false;
+//         if (use_dataset == 1) {
+//             var use_min = t_min;
+//             var use_max = t_max;
+//             var use_data = data;
+//         }
+//         if (use_dataset == 2) {
+//             var use_min = t_min2;
+//             var use_max = t_max2;
+//             var use_data = data2;
+//         }
+//         if (use_dataset == 3) {
+//             var use_min = t_min3;
+//             var use_max = t_max3;
+//             var use_data = data3;
+//         }
+//
+//         last_use_data = use_dataset;
+//         last_num = num_planets;
+//         container.selectAll("g.planet").remove();
+//         container.selectAll("g.planet").data(use_data).enter().append("g").filter(function(d, i) { return i < num_planets})
+//             .on('mouseenter', function(d){
+//                 tip.show(d);
+//                 tip2.show(d);
+//             })
+//             .on('mouseover',function(d){
+//                 sun_size = d['S. Radius (SU)'] *100;
+//                 sun_global_img.attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size);
+//             })
+//             .on('mouseout',function(){
+//                 tip.hide();
+//                 tip2.hide();
+//             })
+//             .attr("class", "planet").each(function(d, i) {
+//             d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",(0.05+d['Norm Distance'])*h/2)
+//                 .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], use_min, use_max)))
+//         });
+//
+//         d3.select("g.planet").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
+//         first_iteration = false;
+//     }
+// });
 
 
 
@@ -264,12 +293,12 @@ var speed = 0;
 d3.timer(function() {
   var delta = (Date.now() - t0);
   svg.selectAll(".planet").attr("transform", function(d) {
-    if(slowdown==1){
+    if(slowdown===1){
         speed += 0.15;
     }else{
         speed += 0.02;
-        
     }
+    // console.log(d.phi0 + speed * (1/d['P. Period (days)'])/2);
     return "rotate(" + d.phi0 + speed * (1/d['P. Period (days)'])/2 + ")";
   });
 });

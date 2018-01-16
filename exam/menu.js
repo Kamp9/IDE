@@ -1,7 +1,10 @@
+// import change_data from 'system.js';
+
+
 var defaultText = "Change Data";
 
 var use_dataset = 1;
-var num_planets = 50;
+var num_planets = 25;
 
 var dataset_sizes = [51, 625, 625];
 
@@ -181,8 +184,8 @@ for (var iB = 0; iB < nTop; iB++) {
         .style("opacity", 0.5)
         .style("fill", "#6e90ee")
         .on("click", function(d, i) {
-            num_planets = dataset_sizes[d.num - 1];
-            use_dataset = d.num;
+            change_dataset(d.num);
+            // use_dataset = d.num;
         })
         .on("mouseover", function(d, i) {
             //window.alert("say something");
