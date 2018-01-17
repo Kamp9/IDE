@@ -185,7 +185,7 @@ var svg = d3.select("#planetarium").insert("svg")
   .attr("width", w).attr("height", h)
   .on("mouseover",function(d){
     slowdown = 0;
-    tip3.show();
+    // tip3.show();
 
   })
   .on("mouseout",function(d){
@@ -204,7 +204,9 @@ sun_global_img = svg.select("#sun");
 
 svg.append("g").append("circle").attr("cx", w/2).attr("cy", h/2).attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
 
-
+svg.append("g").append("rect").attr("x",5).attr("y",10).attr("stroke","#ffffff").style("fill","none")
+    .attr("width","300").attr("height",100);
+svg.append("text").text("HUEHUEHUE").attr("x",10).attr("y",35).attr("fill",'white');
 // sun_global_img.attr("x",0);
 
 // tooltips
@@ -247,14 +249,22 @@ svg.call(tip3);
 
 
 
-var offsets = document.getElementById('planetarium').getBoundingClientRect();
-var top1 = offsets.top;
-var left1 = offsets.left;
+function getPos(el) {
+    // yay readability
+    for (var lx=0, ly=0;
+         el != null;
+         lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+    return {x: lx,y: ly};
+}
+var offsets = document.getElementById('planetarium');
+var positions = (getPos(offsets));
+// var top1 = offsets.top;
+// var left1 = offsets.left;
 
-console.log(top1);
-console.log(left1);
+// console.log(top1);
+// console.log(left1);
+d3.select("#hej").style("top",positions.y).style("left",positions.x).style("opacity",1).attr("test",0);
 
-d3.select("#hej").style("top",top1).style("left",left1).style("opacity",1);
 
 var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")");
