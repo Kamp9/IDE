@@ -181,9 +181,13 @@ function calculateColor(t, min_t, max_t) {
 
 
 var offsets = document.getElementById('planetarium').getBoundingClientRect();
-var top = offsets.top;
-var left = offsets.left;
+var top1 = offsets.top;
+var left1 = offsets.left;
 
+console.log(top1);
+console.log(left1);
+
+d3.select("hej").style("top",top1).style("left",left1).style("opacity",1);
 // Create Planetarium
 var svg = d3.select("#planetarium").insert("svg")
   .attr("width", w).attr("height", h)
@@ -233,7 +237,8 @@ var tip2 = d3.tip()
     })
 
 var tip3 = d3.tip()
-  .attr('class', 'd3-tip2')
+  .attr('class', 'd3-tip3')
+  .attr('id',"hej")
   .html(function() {
     return "<strong>Name:</strong> <span style='color:red'>" + 1 + "</span><br>"+
            "<strong>Mass:</strong> <span style='color:red'>" + 1 +" EU" +"</span><br>"+
