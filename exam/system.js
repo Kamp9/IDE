@@ -204,9 +204,9 @@ sun_global_img = svg.select("#sun");
 
 svg.append("g").append("circle").attr("cx", w/2).attr("cy", h/2).attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
 
-svg.append("g").append("rect").attr("x",5).attr("y",10).attr("stroke","#ffffff").style("fill","none")
-    .attr("width","300").attr("height",100);
-svg.append("text").text("HUEHUEHUE").attr("x",10).attr("y",35).attr("fill",'white');
+// svg.append("g").append("rect").attr("x",5).attr("y",10).attr("stroke","#ffffff").style("fill","none")
+//     .attr("width","300").attr("height",100);
+// svg.append("text").text("HUEHUEHUE").attr("x",10).attr("y",35).attr("fill",'white');
 // sun_global_img.attr("x",0);
 
 // tooltips
