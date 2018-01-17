@@ -180,14 +180,6 @@ function calculateColor(t, min_t, max_t) {
 }
 
 
-var offsets = document.getElementById('planetarium').getBoundingClientRect();
-var top1 = offsets.top;
-var left1 = offsets.left;
-
-console.log(top1);
-console.log(left1);
-
-d3.select("hej").style("top",top1).style("left",left1).style("opacity",1);
 // Create Planetarium
 var svg = d3.select("#planetarium").insert("svg")
   .attr("width", w).attr("height", h)
@@ -252,6 +244,17 @@ var tip3 = d3.tip()
 svg.call(tip);
 svg.call(tip2);
 svg.call(tip3);
+
+
+
+var offsets = document.getElementById('planetarium').getBoundingClientRect();
+var top1 = offsets.top;
+var left1 = offsets.left;
+
+console.log(top1);
+console.log(left1);
+
+d3.select("#hej").style("top",top1).style("left",left1).style("opacity",1);
 
 var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")");
