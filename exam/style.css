@@ -22,6 +22,21 @@
   margin-bottom: 3cm;
 }
 
+#boxbox {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  fill: none;
+  border : 2px solid white;
+  width : 300px;
+  color:white;
+  top: 20px;
+  left:5px;
+}
+
 .container {
   width: 1400px;
   max-width: 1800px;
