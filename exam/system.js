@@ -8,6 +8,10 @@ var num_planets = 50;
 
 slider_mode = 0;
 function slider_changer(inp){
+    d3.selectAll("button").style("background-color", "#444444");
+    
+    d3.selectAll("#but"+inp).style("background-color", "#585859");
+    // console.log(tmp)
  
     slider_mode = inp;
 }
@@ -105,7 +109,7 @@ var svgslider = d3.select("#svgslider"),
     height = +svgslider.attr("height");
 
 var x = d3.scaleLinear()
-    .domain([1, d3.selectAll(data).size()]) // sets width. may work for other datasets. time will show
+    .domain([0, 100]) // sets width. may work for other datasets. time will show
     .range([0, width])
     .clamp(true);
 
@@ -127,18 +131,18 @@ slider.append("line")
 
 slider.insert("g", ".track-overlay")
     .attr("class", "ticks")
-    .attr("transform", "translate(0," + 18 + ")")
+    .attr("transform", "translate(0," + 22 + ")")
     .selectAll("text")
     .data(x.ticks(10))
     .enter().append("text")
     .attr("x", x)
     .attr("text-anchor", "middle")
-    .text(function(d) { return d ; });
+    .text(function(d) { return d + "%" ; });
 
 var handle = slider.insert("circle", ".track-overlay")
     .attr("class", "handle")
     .attr("r", 9)
-    .attr("cx",x(d3.selectAll(data).size()));
+    .attr("cx",x(100));
 
 
 
@@ -150,9 +154,13 @@ function select_planets(h) {
         container.selectAll("g.planet").filter(function(d, i) { return i >= num_planets}).attr("opacity",0)
         break;
     case 1:
-        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] < h/d3.selectAll(data).size()}).attr("opacity",1)
-        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] > h/d3.selectAll(data).size()}).attr("opacity",0)
+        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] < h/100}).attr("opacity",1)
+        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] > h/100}).attr("opacity",0)
         break;
+    case 2:
+        container.selectAll("g.planet").filter(function(d, i) { return (d['P. Ts Mean (K)']-t_min) / (t_max-t_min) < h/100}).attr("opacity",1)
+        container.selectAll("g.planet").filter(function(d, i) { return (d['P. Ts Mean (K)']-t_min) / (t_max-t_min) > h/100}).attr("opacity",0)
+        break;    
     default:
     }
 
@@ -171,11 +179,18 @@ function calculateColor(t, min_t, max_t) {
     return d3.rgb(Math.floor(r), Math.floor(g), Math.floor(b));
 }
 
+
+var offsets = document.getElementById('planetarium').getBoundingClientRect();
+var top = offsets.top;
+var left = offsets.left;
+
 // Create Planetarium
 var svg = d3.select("#planetarium").insert("svg")
   .attr("width", w).attr("height", h)
   .on("mouseover",function(d){
     slowdown = 0;
+    tip3.show();
+
   })
   .on("mouseout",function(d){
     slowdown = 1;
@@ -190,6 +205,9 @@ svg.append("svg:image")
     .attr("x", w/2-sun_size/2).attr("y", h/2-sun_size/2).attr("height", sun_size).attr("width", sun_size).attr("class", "sun");
 
 sun_global_img = svg.select("#sun");
+
+svg.append("g").append("circle").attr("cx", w/2).attr("cy", h/2).attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
+
 
 // sun_global_img.attr("x",0);
 
@@ -213,8 +231,22 @@ var tip2 = d3.tip()
     "<strong>Constellation:</strong> <span style='color:red'>"+d['S. Constellation']+"</span><br>"+
     "<strong>Mass:</strong> <span style='color:red'>"+d['S. Mass (SU)']+ " SU"+"</span><br>";
     })
+
+var tip3 = d3.tip()
+  .attr('class', 'd3-tip2')
+  .html(function() {
+    return "<strong>Name:</strong> <span style='color:red'>" + 1 + "</span><br>"+
+           "<strong>Mass:</strong> <span style='color:red'>" + 1 +" EU" +"</span><br>"+
+           "<strong>Radius:</strong> <span style='color:red'>" + 1 + "</span><br>"+
+           "<strong>Perioid (days):</strong> <span style='color:red'>" + 1 + "</span><br>"+
+           "<strong>Mean distance to sun (AU):</strong> <span style='color:red'>" + 1 + "</span><br>"+
+           "<strong>Mean Temp:</strong> <span style='color:red'>" + 1 + "</span><br>";
+  })
+
+
 svg.call(tip);
 svg.call(tip2);
+svg.call(tip3);
 
 var container = svg.append("g")
 .attr("transform", "translate(" + w/2 + "," + h/2 + ")");
@@ -281,7 +313,8 @@ function change_dataset(use_dataset) {
             .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], use_min, use_max)))
     });
 
-    d3.select("g.planet").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
+    // d3.select("g.planet").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
+    // sun_global_img.append("g").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
 }
 
 
