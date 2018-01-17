@@ -153,6 +153,16 @@ body {
   margin-left:-100px;
 }
 
+.d3-tip3 {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  margin-left:-100px;
+}
+
 
 /* Visit http://www.menucool.com/horizontal/javascript-menu for source code and other menu CSS templates */
 
