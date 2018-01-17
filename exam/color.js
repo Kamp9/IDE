@@ -10,10 +10,10 @@ var MapColumns = 30,
     MapRows = 20;
 
 var margin = {
-    top: 140,
-    right: 30,
+    top: -50,
+    right: 0,
     bottom: 120,
-    left: 30
+    left: 0
 };
 
 //First try for width
@@ -24,9 +24,11 @@ var height = window.innerHeight - margin.top - margin.bottom - 20;
 var hexRadius = d3.min([width/(Math.sqrt(3)*MapColumns), height/(MapRows*1.5)]);
 
 //Set the new height and width based on the max possible
-var width = MapColumns*hexRadius*Math.sqrt(3);
-var height = MapRows*1.5*hexRadius+0.5*hexRadius;
+// var width = MapColumns*hexRadius*Math.sqrt(3);
+// var height = MapRows*1.5*hexRadius+0.5*hexRadius;
 
+width = 1370;
+var height = 5;
 //SVG container
 var svg = d3.select('#color')
     .append("svg")
@@ -49,25 +51,25 @@ var defs = svg.append("defs");
 //////////////// Calculate hexagon centers and put into array /////////////
 ///////////////////////////////////////////////////////////////////////////
 
-var SQRT3 = Math.sqrt(3),
-    hexWidth = SQRT3 * hexRadius,
-    hexHeight = 2 * hexRadius;
-var hexagonPoly = [[0,-1],[SQRT3/2,0.5],[0,1],[-SQRT3/2,0.5],[-SQRT3/2,-0.5],[0,-1],[SQRT3/2,-0.5]];
-var hexagonPath = "m" + hexagonPoly.map(function(p){ return [p[0]*hexRadius, p[1]*hexRadius].join(','); }).join('l') + "z";
-
-var points = [];
-for (var i = 0; i < MapRows; i++) {
-    for (var j = 0; j < MapColumns; j++) {
-        var a;
-        var b = (3 * i) * hexRadius / 2;
-        if (i % 2 === 0) {
-            a = SQRT3 * j * hexRadius;
-        } else {
-            a = SQRT3 * (j - 0.5) * hexRadius;
-        }//else
-        points.push({x: a, y: b});
-    }//for j
-}//for i
+// var SQRT3 = Math.sqrt(3),
+//     hexWidth = SQRT3 * hexRadius,
+//     hexHeight = 2 * hexRadius;
+// var hexagonPoly = [[0,-1],[SQRT3/2,0.5],[0,1],[-SQRT3/2,0.5],[-SQRT3/2,-0.5],[0,-1],[SQRT3/2,-0.5]];
+// var hexagonPath = "m" + hexagonPoly.map(function(p){ return [p[0]*hexRadius, p[1]*hexRadius].join(','); }).join('l') + "z";
+//
+// var points = [];
+// for (var i = 0; i < MapRows; i++) {
+//     for (var j = 0; j < MapColumns; j++) {
+//         var a;
+//         var b = (3 * i) * hexRadius / 2;
+//         if (i % 2 === 0) {
+//             a = SQRT3 * j * hexRadius;
+//         } else {
+//             a = SQRT3 * (j - 0.5) * hexRadius;
+//         }//else
+//         points.push({x: a, y: b});
+//     }//for j
+// }//for i
 
 ///////////////////////////////////////////////////////////////////////////
 //////// Get continuous color scale for the Yellow-Green-Blue fill ////////
@@ -85,8 +87,8 @@ var colorScaleYGB = d3.scaleLinear()
 
 //Needed to map the values of the dataset to the color scale
 var colorInterpolateYGB = d3.scaleLinear()
-    .domain(d3.extent(somData))
-    .range([0,1]);
+    .domain([-60.05, 59.65])
+    .range([0, 1]);
 
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////// Create the YGB color gradient ///////////////////////
@@ -141,36 +143,36 @@ defs.append("linearGradient")
 //////////////////////////// Draw Heatmap /////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
-//Append title to the top
-svg.append("text")
-    .attr("class", "title")
-    .attr("x", width/2-10)
-    .attr("y", -80)
-    .text("Clustering of Supermarkets");
-svg.append("text")
-    .attr("class", "subtitle")
-    .attr("x", width/2-10)
-    .attr("y", -58)
-    .text("based on demographics");
-svg.append("text")
-    .attr("class", "subtitle")
-    .attr("x", width/2-10)
-    .attr("y", -30)
-    .style("font-weight", 800)
-    .style("fill", "#676767")
-    .text("click anywhere to switch colors");
-
-svg.append("g")
-    .selectAll(".hexagon")
-    .data(points)
-    .enter().append("path")
-    .attr("class", "hexagon")
-    .attr("d", function (d) { return "M" + d.x + "," + d.y + hexagonPath; })
-    .style("stroke", "#fff")
-    .style("stroke-width", "1px")
-    .style("fill", "white")
-    .on("mouseover", mover)
-    .on("mouseout", mout);
+// //Append title to the top
+// svg.append("text")
+//     .attr("class", "title")
+//     .attr("x", width/2-10)
+//     .attr("y", -80)
+//     .text("Clustering of Supermarkets");
+// svg.append("text")
+//     .attr("class", "subtitle")
+//     .attr("x", width/2-10)
+//     .attr("y", -58)
+//     .text("based on demographics");
+// svg.append("text")
+//     .attr("class", "subtitle")
+//     .attr("x", width/2-10)
+//     .attr("y", -30)
+//     .style("font-weight", 800)
+//     .style("fill", "#676767")
+//     .text("click anywhere to switch colors");
+//
+// svg.append("g")
+//     .selectAll(".hexagon")
+//     .data(points)
+//     .enter().append("path")
+//     .attr("class", "hexagon")
+//     .attr("d", function (d) { return "M" + d.x + "," + d.y + hexagonPath; })
+//     .style("stroke", "#fff")
+//     .style("stroke-width", "1px")
+//     .style("fill", "white")
+//     .on("mouseover", mover)
+//     .on("mouseout", mout);
 
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////////// Draw the legend ////////////////////////////////
@@ -194,12 +196,12 @@ legendsvg.append("rect")
     .attr("height", legendHeight)
     .style("fill", "none");
 
-//Append title
-legendsvg.append("text")
-    .attr("class", "legendTitle")
-    .attr("x", 0)
-    .attr("y", -2)
-    .text("Store Competition Index");
+// //Append title
+// legendsvg.append("text")
+//     .attr("class", "legendTitle")
+//     .attr("x", 0)
+//     .attr("y", -2)
+//     .text("Store Competition Index");
 
 //Set scale for x-axis
 var xScale = d3.scaleLinear()
@@ -246,26 +248,26 @@ function mout(d) {
 ///////////////////////////////////////////////////////////////////////////
 
 //On click transition
-d3.select("body").on("click", function() {
-    if(currentFill === "rainbow") {
-        updateYGB();
-        currentFill = "YGB";
-    } else {
-        updateRainbow();
-        currentFill = "rainbow";
-    }//else
-});
+// d3.select("body").on("click", function() {
+//     if(currentFill === "rainbow") {
+//         updateYGB();
+//         currentFill = "YGB";
+//     } else {
+//         updateRainbow();
+//         currentFill = "rainbow";
+//     }//else
+// });
 
 //Update the colors to a more light yellow-green-dark blue
-function updateYGB() {
-    //Fill the legend rectangle
-    svg.select(".legendRect")
-        .style("fill", "url(#gradient-ygb-colors)");
-    //Transition the hexagon colors
-    svg.selectAll(".hexagon")
-        .transition().duration(1000)
-        .style("fill", function (d,i) { return colorScaleYGB(colorInterpolateYGB(somData[i])); });
-}//updateYGB
+// function updateYGB() {
+//     //Fill the legend rectangle
+//     svg.select(".legendRect")
+//         .style("fill", "url(#gradient-ygb-colors)");
+//     //Transition the hexagon colors
+//     // svg.selectAll(".hexagon")
+//     //     .transition().duration(1000)
+//     //     .style("fill", function (d,i) { return colorScaleYGB(colorInterpolateYGB(somData[i])); });
+// }//updateYGB
 
 //Transition the colors to a rainbow
 function updateRainbow() {
@@ -273,9 +275,9 @@ function updateRainbow() {
     svg.select(".legendRect")
         .style("fill", "url(#gradient-rainbow-colors)");
     //Transition the hexagon colors
-    svg.selectAll(".hexagon")
-        .transition().duration(1000)
-        .style("fill", function (d,i) { return colorScaleRainbow(colorInterpolateRainbow(somData[i])); })
+    // svg.selectAll(".hexagon")
+    //     .transition().duration(1000)
+    //     .style("fill", function (d,i) { return colorScaleRainbow(colorInterpolateRainbow(somData[i])); })
 }//updateRainbow
 
 //Start set-up
