@@ -274,9 +274,25 @@ d3.timer(function() {
   });
 });
 
+var defs = svg.append("defs");
+
+var linearGradient = defs.append("linearGradient")
+    .attr("id", "linear-gradient");
+
+//A color scale
+    var colorScale = d3.scaleLinear()
+        .range(["#2c7bb6", "#00a6ca","#00ccbc","#90eb9d","#ffff8c","#f9d057","#f29e2e","#e76818","#d7191c"]);
+
+//Append multiple color stops by using D3's data/enter step
+    linearGradient.selectAll("stop")
+        .data( colorScale.range())
+        .enter().append("stop")
+        .attr("offset", function(d,i) { return i/(colorScale.range().length-1); })
+        .attr("stop-color", function(d) { return d; })
+        .style("fill", "url(#linear-gradient)");
+
 
 change_dataset(1);
-
 
 function change_dataset(use_dataset) {
     use_dataset = current_data;
