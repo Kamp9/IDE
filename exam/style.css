@@ -54,6 +54,18 @@
   width:1500px;
 }
 
+#myCarousel {
+  padding-left:50px;
+  padding-right: 50px;
+}
+
+#lcarou{
+  left:50px;
+}
+
+#rcarou{
+  right:50px;
+}
 /*#planetarium{
   width: 1800px;
   max-width:  = 1800px;
