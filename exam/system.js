@@ -146,6 +146,14 @@ var handle = slider.insert("circle", ".track-overlay")
     .attr("cx",x(100));
 
 
+d3.select("#but1").on('click',function(d){
+            select_planets(-1);
+        })
+
+d3.select("#but2").on('click',function(d){
+            select_planets(-1);
+        })
+
 d3.select("#but3").on('click',function(d){
             select_planets(3);
         })
@@ -163,19 +171,22 @@ d3.select("#butdat").on('click',function(d){
 
 
 function select_planets(h) {
-    num_planets = Math.floor(h);
+    if(h>0){
+        num_planets = Math.floor(h);
+    }
     switch(slider_mode) {
     case 0:
         container.selectAll("g.planet").filter(function(d, i) { return i < num_planets}).attr("opacity",1)
         container.selectAll("g.planet").filter(function(d, i) { return i >= num_planets}).attr("opacity",0)
         break;
     case 1:
-        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] < h/100}).attr("opacity",1)
-        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] > h/100}).attr("opacity",0)
+        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] < num_planets/100}).attr("opacity",1)
+        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] > num_planets/100}).attr("opacity",0)
         break;
     case 2:
-        container.selectAll("g.planet").filter(function(d, i) { return (d['P. Ts Mean (K)']-t_min) / (t_max-t_min) < h/100}).attr("opacity",1)
-        container.selectAll("g.planet").filter(function(d, i) { return (d['P. Ts Mean (K)']-t_min) / (t_max-t_min) > h/100}).attr("opacity",0)
+        container.selectAll("g.planet").filter(function(d, i) { return d['Norm Distance'] < num_planets/100}).attr("opacity",1)
+        container.selectAll("g.planet").filter(function(d, i) { return (d['P. Ts Mean (K)']-t_min) / (t_max-t_min) < num_planets/100}).attr("opacity",1)
+        container.selectAll("g.planet").filter(function(d, i) { return (d['P. Ts Mean (K)']-t_min) / (t_max-t_min) > num_planets/100}).attr("opacity",0)
         break;
     case 3:
         container.selectAll("g.planet").attr("opacity",0)
