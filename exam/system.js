@@ -266,15 +266,18 @@ var tip = d3.tip()
            "<strong>Radius:</strong> <span style='color:red'>" + d['P. Radius (EU)'] + "</span><br>"+
            "<strong>Perioid (days):</strong> <span style='color:red'>" + d['P. Period (days)'] + "</span><br>"+
            "<strong>Mean distance to sun (AU):</strong> <span style='color:red'>" + d['P. Mean Distance (AU)'] + "</span><br>"+
-           "<strong>Mean Temp:</strong> <span style='color:red'>" + (d['P. Ts Mean (K)'] - 273.15).toFixed(2)+('\xB0')+ "C" + "</span><br>";
+           "<strong>Mean Temp:</strong> <span style='color:red'>" + (d['P. Ts Mean (K)'] - 273.15).toFixed(2)+('\xB0')+ "C" + "</span><br><br>"+
+            "<strong>Sun name:</strong> <span style='color:red'>"+d['S. Name']+"</span><br>"+
+            "<strong>Sun Constellation:</strong> <span style='color:red'>"+d['S. Constellation']+"</span><br>"+
+            "<strong>Sun Mass:</strong> <span style='color:red'>"+d['S. Mass (SU)']+ " SU"+"</span><br>";
   })
 
 var tip2 = d3.tip()
   .attr('class', 'd3-tip2')
   .html(function(d){
-    return "<strong>Name:</strong> <span style='color:red'>"+d['S. Name']+"</span><br>"+
-    "<strong>Constellation:</strong> <span style='color:red'>"+d['S. Constellation']+"</span><br>"+
-    "<strong>Mass:</strong> <span style='color:red'>"+d['S. Mass (SU)']+ " SU"+"</span><br>";
+    return "<strong>Sun name:</strong> <span style='color:red'>"+d['S. Name']+"</span><br>"+
+    "<strong>Sun Constellation:</strong> <span style='color:red'>"+d['S. Constellation']+"</span><br>"+
+    "<strong>Sun Mass:</strong> <span style='color:red'>"+d['S. Mass (SU)']+ " SU"+"</span><br>";
     })
 
 var tip3 = d3.tip()
@@ -357,7 +360,7 @@ function change_dataset(use_dataset) {
         .on('mouseenter', function(d){
         if(d3.select(this).attr("opacity") ==1){    
             tip.show(d);
-            tip2.show(d);
+            // tip2.show(d);
         }
         })
         .on('mouseover',function(d){
@@ -369,7 +372,7 @@ function change_dataset(use_dataset) {
         .on('mouseout',function(){
             if(d3.select(this).attr("opacity") ==1){    
                 tip.hide();
-                tip2.hide();
+                // tip2.hide();
             }
         })
         .attr("class", "planet").each(function(d, i) {
