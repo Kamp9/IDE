@@ -24,57 +24,6 @@ function data_changer(inp) {
 }
 
 
-// d3.csv("planets.csv",function(error, data2) {
-//     if (error) throw error;
-//     var t_min2 = Infinity;
-//     var t_max2 = 0;
-//     data2.forEach(function(d){
-//         d['P. Mass (EU)'] = + d['P. Mass (EU)']
-//         d['P. Gravity (EU)'] = + d['P. Gravity (EU)']
-//         d['P. Disc. Year'] = + d['P. Disc. Year']
-//         d['P. Habitable'] = + d['P. Habitable']
-//         d['P. Radius (EU)'] = + d['P. Radius (EU)']
-//         d['P. Ts Mean (K)'] = + d['P. Ts Mean (K)']
-//         d['P. Mean Distance (AU)'] = + d['P. Mean Distance (AU)']
-//         d['P. Period (days)'] = + d['P. Period (days)']
-//         d['S. Mass (SU)'] = + d['S. Mass (SU)']
-//         d['S. Radius (SU)'] = + d['S. Radius (SU)']
-//         d['Norm Distance'] = + d['Norm Distance']
-//         d.phi0 = 190
-//         if (d['P. Ts Mean (K)'] > t_max2) {
-//             t_max2 = d['P. Ts Mean (K)'];
-//         }
-//         if (d['P. Ts Mean (K)'] < t_min2) {
-//             t_min2 = d['P. Ts Mean (K)'];
-//         }
-//     });
-
-//     d3.csv("planets2.csv",function(error, data3) {
-//         if (error) throw error;
-//         var t_min3 = Infinity;
-//         var t_max3 = 0;
-//         data3.forEach(function(d){
-//             d['P. Mass (EU)'] = + d['P. Mass (EU)']
-//             d['P. Gravity (EU)'] = + d['P. Gravity (EU)']
-//             d['P. Disc. Year'] = + d['P. Disc. Year']
-//             d['P. Habitable'] = + d['P. Habitable']
-//             d['P. Radius (EU)'] = + d['P. Radius (EU)']
-//             d['P. Ts Mean (K)'] = + d['P. Ts Mean (K)']
-//             d['P. Mean Distance (AU)'] = + d['P. Mean Distance (AU)']
-//             d['P. Period (days)'] = + d['P. Period (days)']
-//             d['S. Mass (SU)'] = + d['S. Mass (SU)']
-//             d['S. Radius (SU)'] = + d['S. Radius (SU)']
-//             d['Norm Distance'] = + d['Norm Distance']
-
-//             d.phi0 = 190
-//             if (d['P. Ts Mean (K)'] > t_max3) {
-//                 t_max3 = d['P. Ts Mean (K)'];
-//             }
-//             if (d['P. Ts Mean (K)'] < t_min3) {
-//                 t_min3 = d['P. Ts Mean (K)'];
-//             }
-//         });
-
 
 d3.csv("habit_planets.csv", function (error, data) {
     if (error) throw error;
