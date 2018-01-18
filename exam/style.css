@@ -49,26 +49,18 @@
   float : left;
   padding-right: 25px;
   padding-bottom: 10px;
+  padding-top: 20px;
 }
 .image-wrapper img{
   width : 100%;
 }
 
-/*#norm-text {
-  vertical-align: middle;
-  font-size: 26px;
-  line-height: 140%;
-  display: table-cell;
-}
-*/
 
 #norm-text {
   text-align: justify;
   width : 700px;
   padding-left : 50px;
   padding-right : 50px;
-  /*margin-left: 5%;*/
-  /*margin-right: 5%;*/
 }
 
 
@@ -88,17 +80,6 @@
 #rcarou{
   right:50px;
 }
-/*#planetarium{
-  width: 1800px;
-  max-width:  = 1800px;
-  position : relative;
-}
-
-#planetarium .container{
-  width: 1400;
-  background: center center no-repeat;
-}
-*/
 
 #intro-header {
   background: center center no-repeat;
@@ -109,7 +90,6 @@
   margin-bottom: 50px;
   height: 700px;
 }
-
 
 #intro-header .container {
   background: rgba(0,0,0,0.1);
@@ -136,7 +116,6 @@
   font-size: 50px;
 }
 
-
 /* style body */
 
 body {
@@ -144,9 +123,6 @@ body {
   background-color: rgb(250, 250, 255);
   font-size: 24px;
   line-height: 140%;
-  /*background-image: url("Space_website_background_by_leftyfencer.jpg");*/
-  /*background-repeat: no-repeat;*/
-  /*background-size: 100% 100%;*/
 }
 
 
@@ -165,7 +141,7 @@ body {
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
   border-radius: 2px;
-  top:2800px!important;
+  top:4200px!important;
   left:60%!important;
   margin-left:-100px;
 }
