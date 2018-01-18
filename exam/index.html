@@ -1,218 +1,263 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-      <!-- Google Font -->
-      <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+    <!-- Google Font -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 
-      <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="d3-tip.js"></script>
     <script type="text/javascript" src="system.js"></script>
 
 
-
-  </head>
+</head>
 <body>
-    <header id="intro-header" style="background-image: url('background2.jpg')">
-      <div class="container">
+<header id="intro-header" style="background-image: url('background2.jpg')">
+    <div class="container">
         <h1>Exoplanets</h1>
         <p class="byline">
-          Final Project
+            Final Project
         </p>
-      </div>
-    </header>
+    </div>
+</header>
 
 
-<div id  = "visualization" class = "container">
-    <div class = "row">
+<div id="visualization" class="container">
+    <div class="row">
         <!-- <div id = "norm-text"> -->
-        <div id="norm-text" class = "col-md-6">
-        <p>
-        <h3>Introduction</h3>   
-        In the last 20 years more than 3,700 exoplanets have been discovered. Exoplanets are 
-        planets which orbit a star outside of our solar system. Most of these planets are found by the Kepler telescope. We visualize the planets discovered by the Kepler telescope, with a focus on potential habitable exoplanets. For a planet to be habitable for humans it needs to have almost the same conditions as our own earth. One of the criterias for this is that the planet is inside the suns habitable zone.
-            The habitable zone are dependent on the amount of energy the sun generates, and hereby affecting the planet, named the stellar flux. Larger suns tend to have a larger stellar flux than smaller suns. Therefore, some planets can be relatively cold even though they are close to the sun, as a consequence of a small sun. Vise versa, planets far away from the sun can also be warm enough to be habitable, if the sun is large.
-            <div class = image-wrapper>
-            <img src="images/habitzone.jpeg">
-            <span>Habitable zone for planets. source: NASA</span>
-        </div>
+        <div id="norm-text" class="col-md-6">
+            <p>
+            <h3>Introduction</h3>
+            In the last 20 years more than 3,700 exoplanets have been discovered. Exoplanets are
+            planets which orbit a star outside of our solar system. Most of these planets are found by the Kepler
+            telescope. We visualize the planets discovered by the Kepler telescope, with a focus on potential habitable
+            exoplanets. For a planet to be habitable for humans it needs to have almost the same conditions as our own
+            earth. One of the criterias for this is that the planet is inside the suns habitable zone.
+            The habitable zone are dependent on the amount of energy the sun generates, and hereby affecting the planet,
+            named the stellar flux. Larger suns tend to have a larger stellar flux than smaller suns. Therefore, some
+            planets can be relatively cold even though they are close to the sun, as a consequence of a small sun. Vise
+            versa, planets far away from the sun can also be warm enough to be habitable, if the sun is large.
+            <div class=image-wrapper>
+                <img src="images/habitzone.jpeg">
+                <span>Habitable zone for planets. source: NASA</span>
+            </div>
             <p>
             <h3>Dataset</h3>
-            The dataset used are based on the possible habitable subset of the <a href="http://www.hpcf.upr.edu/~abel/phl/phl_hec_all_kepler.csv.zip">phl_hec_all_kepler.csv</a> dataset according to <a href="http://phl.upr.edu/projects/habitable-exoplanets-catalog/data">Habitable Exoplanets Catalog</a>. The whole data can be found on
-            <a href="http://phl.upr.edu/projects/habitable-exoplanets-catalog/data/database">PHL's Exoplanets Catalog</a>. The preprocessing extraction of habitable planets, along with an selection of relevant parameters are done using a python script. The preprocesses data are then saved to an csv file and used in JavaScript, with the D3 library, which performs the extraction and visualization of the data. Larger number of both parameters and planets could be used. However, in order to keep information interpretable for the user, along with not overfilling the visualization with redundant information, both the planets and parameters have been limited.
+            The dataset used are based on the possible habitable subset of the <a
+                href="http://www.hpcf.upr.edu/~abel/phl/phl_hec_all_kepler.csv.zip">phl_hec_all_kepler.csv</a> dataset
+            according to <a href="http://phl.upr.edu/projects/habitable-exoplanets-catalog/data">Habitable Exoplanets
+            Catalog</a>. The whole data can be found on
+            <a href="http://phl.upr.edu/projects/habitable-exoplanets-catalog/data/database">PHL's Exoplanets
+                Catalog</a>. The preprocessing extraction of habitable planets, along with an selection of relevant
+            parameters are done using a python script. The preprocesses data are then saved to an csv file and used in
+            JavaScript, with the D3 library, which performs the extraction and visualization of the data. Larger number
+            of both parameters and planets could be used. However, in order to keep information interpretable for the
+            user, along with not overfilling the visualization with redundant information, both the planets and
+            parameters have been limited.
             </p>
             <p>
             <h3>Visualization Overview</h3>
-            The visualization consists of four different interactive parts. First, the Carousel with interesting planets, seeks to give the reader a more in-depth understanding of specific planets chosen, based on, extraordinary properties. The Main Visualization consists of exoplanets moving around a single sun, representing every planets individual sun. A slider is added to give the user the ability to select a subset of the planets, which would be extremely useful if the number of planets are larger. Last, the menu bar is used to either select the parameter the slider should perform sorting based on, or selecting one of the three habitable specific planets, described in the carousel.
+            The visualization consists of four different interactive parts. First, the Carousel with interesting
+            planets, seeks to give the reader a more in-depth understanding of specific planets chosen, based on,
+            extraordinary properties. The Main Visualization consists of exoplanets moving around a single sun,
+            representing every planets individual sun. A slider is added to give the user the ability to select a subset
+            of the planets, which would be extremely useful if the number of planets are larger. Last, the menu bar is
+            used to either select the parameter the slider should perform sorting based on, or selecting one of the
+            three habitable specific planets, described in the carousel.
             </p>
             <p>
 
         </div>
-        <div id = "norm-text" class = "col-md-6">
+        <div id="norm-text" class="col-md-6">
             <p>
             <h3>Carousel</h3>
-            The Carousel with interesting planets, contains four chosen exoplanets with special parameters, which makes the last three habitable. The first one is a lava planet included to show a differently not habitable planet in relation. The three habitable planets can be selected in the menu bar above the visualization to give a greater understanding of how habitable the exoplanets are, in relation to one another.
+            The Carousel with interesting planets, contains four chosen exoplanets with special parameters, which makes
+            the last three habitable. The first one is a lava planet included to show a differently not habitable planet
+            in relation. The three habitable planets can be selected in the menu bar above the visualization to give a
+            greater understanding of how habitable the exoplanets are, in relation to one another.
             </p>
             <p>
             <h3>Main Visualization</h3>
-            The visualization shows exoplanets from different solar systems merged into one. Each planet can be selected by hovering over it. This will change the size of the sun to fit the plants actual, relative, sun size. A tooltip will present the Name, Mass, Radius, Year length, Distance to the sun, and the Mean temperature. While the sun shows the Name, Constellation, and Mass, where the mass of each sun are in the scale sun units . The same types of data about the earth is shown permanently, in order for the observer to get the data into perspective. Each exoplanet have the relative distance to its own sun, and the length between the earth and our sun are shown as a circle with the mean distance of one astronomical unit (AU). Likewise, the planets sizes are relative to the actual planet size. The temperature are visualized with colors ranging from blue to red. The mean temperature therefore range from about -60 to 60 °C, which can be seen in the color bar below the visualization. The actual speed of the planets are based upon the periods of days it takes for each planet to make a complete orbit around the sun. When the mouse enters the visualization the planets slow down, in order of the user to easier select a given planet, hereby reading the information.
+            The visualization shows exoplanets from different solar systems merged into one. Each planet can be selected
+            by hovering over it. This will change the size of the sun to fit the plants actual, relative, sun size. A
+            tooltip will present the Name, Mass, Radius, Year length, Distance to the sun, and the Mean temperature.
+            While the sun shows the Name, Constellation, and Mass, where the mass of each sun are in the scale sun units
+            . The same types of data about the earth is shown permanently, in order for the observer to get the data
+            into perspective. Each exoplanet have the relative distance to its own sun, and the length between the earth
+            and our sun are shown as a circle with the mean distance of one astronomical unit (AU). Likewise, the
+            planets sizes are relative to the actual planet size. The temperature are visualized with colors ranging
+            from blue to red. The mean temperature therefore range from about -60 to 60 °C, which can be seen in the
+            color bar below the visualization. The actual speed of the planets are based upon the periods of days it
+            takes for each planet to make a complete orbit around the sun. When the mouse enters the visualization the
+            planets slow down, in order of the user to easier select a given planet, hereby reading the information.
             </p>
             <p>
             <h3>Slider</h3>
-            A slider have been added for the user to reduce or increase the amount of planets shown in the visualization. Some of the bottoms below it, can be used to change the functionality of the slider, i.g. to sort the ingoing and outgoing planets, in the visualization, based on different parameters.
+            A slider have been added for the user to reduce or increase the amount of planets shown in the
+            visualization. Some of the bottoms below it, can be used to change the functionality of the slider, i.g. to
+            sort the ingoing and outgoing planets, in the visualization, based on different parameters.
             </p>
             <p>
             <h3>Menu bar</h3>
-            Several button have been added on top of the visualization. The buttons are grouped into two variant. Some of them controls which parameters the slider should perform sorting on. The other group of buttons, selects a single planets from the special plants in the carousel. Each of the button groups can have one button selected at each time.
+            Several button have been added on top of the visualization. The buttons are grouped into two variant. Some
+            of them controls which parameters the slider should perform sorting on. The other group of buttons, selects
+            a single planets from the special plants in the carousel. Each of the button groups can have one button
+            selected at each time.
             </p>
-            
-            <div class = image-wrapper>
-            <img src="images/kepler.jpg">
-            <span>The Kepler telescope. source: NASA</span>
+
+            <div class=image-wrapper>
+                <img src="images/kepler.jpg">
+                <span>The Kepler telescope. source: NASA</span>
             </div>
 
 
         </div>
 
 
-<div class="container">
-  <h2>Interesting Planets</h2>  
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
+        <div class="container">
+            <h2>Interesting Planets</h2>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                </ol>
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="item active">
-        <img src="images/lava.jpg" alt="Lava" style="width:100%;">
-        <div class="carousel-caption d-none d-md-block">
-            <h5>Kepler-10b</h5>
-            <p>Kepler's first rocky planet discovery is a scorched, Earth-size world that scientists believe may have a lava ocean on its surface.</p>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="images/lava.jpg" alt="Lava" style="width:100%;">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Kepler-10b</h5>
+                            <p>Kepler's first rocky planet discovery is a scorched, Earth-size world that scientists
+                                believe may have a lava ocean on its surface.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="item">
+                        <img src="images/kepler186f.jpg" alt="lava" style="width:100%;">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Kepler-186 f/ KOI-571.05</h5>
+                            <p>The first habitable exoplanet to be discovered was the Kepler-186 f. This planet is very
+                                similar to earths size while also being in the habitable zone. Kepler-186f orbits a red
+                                dwarf</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="images/kepler22b.jpg" alt="water" style="width:100%;">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Kepler-22b f/ KOI-87.01 </h5>
+                            <p>A planet in the habitable zone and a possible water-world planet unlike any seen in our
+                                solar system.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="images/kepler62b.jpg" alt="water" style="width:100%;">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Kepler-62b b/ KOI-701.04) </h5>
+                            <p>Kepler 62b is a super-Earth exoplanet orbiting within the habitable zone of the star
+                                Kepler-62, the outermost of five such planets discovered by NASA's Kepler spacecraft. It
+                                is located about 1,200 light-years from Earth in the constellation of Lyra</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" id="lcarou" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" id="rcarou" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
 
-      </div>
 
-      <div class="item">
-        <img src="images/kepler186f.jpg" alt="lava" style="width:100%;">
-        <div class="carousel-caption d-none d-md-block">
-        <h5>Kepler-186 f/ KOI-571.05</h5>
-        <p>The first habitable exoplanet to be discovered was the Kepler-186 f. This planet is very similar to earths size while also being in the habitable zone. Kepler-186f orbits a red dwarf</p>
-        </div>
-      </div>
-    
-      <div class="item">
-        <img src="images/kepler22b.jpg" alt="water" style="width:100%;">
-        <div class="carousel-caption d-none d-md-block">
-            <h5>Kepler-22b f/ KOI-87.01 </h5>
-            <p>A planet in the habitable zone and a possible water-world planet unlike any seen in our solar system.</p>
-        </div>
-      </div>      
-      <div class="item">
-        <img src="images/kepler62b.jpg" alt="water" style="width:100%;">
-        <div class="carousel-caption d-none d-md-block">
-            <h5>Kepler-62b b/ KOI-701.04) </h5>
-            <p>Kepler 62b is a super-Earth exoplanet orbiting within the habitable zone of the star Kepler-62, the outermost of five such planets discovered by NASA's Kepler spacecraft. It is located about 1,200 light-years from Earth in the constellation of Lyra</p>
-        </div>
-      </div>
     </div>
 
-    <!-- Left and right controls -->
-    <a class="left carousel-control" id="lcarou" href="#myCarousel" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" id="rcarou" href="#myCarousel" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-</div>
 
-
+    <div>
+        <svg width="1370" height="60" id=svgslider></svg>
     </div>
-
-
-<div >
-    <svg width="1370" height="60" id = svgslider></svg>
-</div>
-
 
 
     <div id="sse50">
-    <div id="sses50">
-        <ul>
-            <!-- <button id = "butdat" class="dropbtn">Dropdown</button> -->
-  <!-- <div class="dropdown"> -->
-  <!-- <button onclick="myFunction()" class="dropbtn">Sort</button> -->
-   <!-- <div id="myDropdown" class="dropdown-content"> -->
-    <button id = "but0" onclick="slider_changer(0)" class="dropbtn">Sort by id</button>
-    <button id = "but1" onclick="slider_changer(1)" class="dropbtn">Sort by distance</button>
-    <button id = "but2" onclick="slider_changer(2)" class="dropbtn">Sort by Temperature</button>
-    <button id = "but3" onclick="slider_changer(3)" class="dropbtn">Kepler 186 f</button>
-    <button id = "but4" onclick="slider_changer(4)" class="dropbtn">Kepler 22 b</button>
-    <button id = "but5" onclick="slider_changer(5)" class="dropbtn">Kepler 62 b</button>
-  <!-- </div> -->
+        <div id="sses50">
+            <ul>
+                <!-- <button id = "butdat" class="dropbtn">Dropdown</button> -->
+                <!-- <div class="dropdown"> -->
+                <!-- <button onclick="myFunction()" class="dropbtn">Sort</button> -->
+                <!-- <div id="myDropdown" class="dropdown-content"> -->
+                <button id="but0" onclick="slider_changer(0)" class="dropbtn">Sort by id</button>
+                <button id="but1" onclick="slider_changer(1)" class="dropbtn">Sort by distance</button>
+                <button id="but2" onclick="slider_changer(2)" class="dropbtn">Sort by Temperature</button>
+                <button id="but3" onclick="slider_changer(3)" class="dropbtn">Kepler 186 f</button>
+                <button id="but4" onclick="slider_changer(4)" class="dropbtn">Kepler 22 b</button>
+                <button id="but5" onclick="slider_changer(5)" class="dropbtn">Kepler 62 b</button>
+                <!-- </div> -->
 
-        </ul>
+            </ul>
+        </div>
     </div>
-</div>
 
 
-<div id = "planetarium" style="background-image: url('background2.jpg')" >
-    <div id = "boxbox">
-        <span>Name : Earth </span><br>
-        <span>Mass : 1 Earth Unit </span><br>
-        <span>Radius : 1 Earth Radi </span><br>
-        <span>Mean dist: 1 AU </span><br>
-        <span>Period: 365.25 days </span><br>
-        <span>Mean Temp: 14.9 °C </span><br>
+    <div id="planetarium" style="background-image: url('background2.jpg')">
+        <div id="boxbox">
+            <span>Name : Earth </span><br>
+            <span>Mass : 1 Earth Unit </span><br>
+            <span>Radius : 1 Earth Radi </span><br>
+            <span>Mean dist: 1 AU </span><br>
+            <span>Period: 365.25 days </span><br>
+            <span>Mean Temp: 14.9 °C </span><br>
+        </div>
     </div>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+    </script>
+
+    <div id="color"></div>
+    <script src="color.js"></script>
+
 </div>
-<script>
-    function myFunction(){
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-</script>
-
-<div id="color"></div>
-<script src="color.js"></script>
-
-</div>
-
 
 
 <p>
-            <h3>Sources:</h3>
-            Some of the code used for the visualization and styling have been used from different sources.
-            <br>
-            <a href = "https://stackoverflow.com/questions/14872687/how-to-rotate-an-object-around-the-center-in-d3-js"> Getting objects to rotate around a center</a>
-            <br>
-            <a href ="https://github.com/Caged/d3-tip">D3 tip to make the tooltips on hovedover</a>
-            <br>
-            <a href = "http://bl.ocks.org/nbremer/5cd07f2cb4ad202a9facfbd5d2bc842e">Colorbar</a>
-            <br>
-            <a href = "https://bl.ocks.org/mbostock/6452972"> Slider</a>
-            <br>
-            <a href = "http://www.menucool.com/horizontal/menu-code?menu=50&skin=2&p=1"></a>
+<h3>Sources:</h3>
+Some of the code used for the visualization and styling have been used from different sources.
+<br>
+<a href="https://stackoverflow.com/questions/14872687/how-to-rotate-an-object-around-the-center-in-d3-js"> Getting
+    objects to rotate around a center</a>
+<br>
+<a href="https://github.com/Caged/d3-tip">D3 tip to make the tooltips on hovedover</a>
+<br>
+<a href="http://bl.ocks.org/nbremer/5cd07f2cb4ad202a9facfbd5d2bc842e">Colorbar</a>
+<br>
+<a href="https://bl.ocks.org/mbostock/6452972"> Slider</a>
+<br>
+<a href="http://www.menucool.com/horizontal/menu-code?menu=50&skin=2&p=1"></a>
 
-            </p>
+</p>
 <footer>
     <p>Created by: Rasmus Klitgaard & Troels Kamp Leskes</p>
 </footer>
