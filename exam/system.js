@@ -24,56 +24,56 @@ function data_changer(inp){
 
 
 
-d3.csv("planets.csv",function(error, data2) {
-    if (error) throw error;
-    var t_min2 = Infinity;
-    var t_max2 = 0;
-    data2.forEach(function(d){
-        d['P. Mass (EU)'] = + d['P. Mass (EU)']
-        d['P. Gravity (EU)'] = + d['P. Gravity (EU)']
-        d['P. Disc. Year'] = + d['P. Disc. Year']
-        d['P. Habitable'] = + d['P. Habitable']
-        d['P. Radius (EU)'] = + d['P. Radius (EU)']
-        d['P. Ts Mean (K)'] = + d['P. Ts Mean (K)']
-        d['P. Mean Distance (AU)'] = + d['P. Mean Distance (AU)']
-        d['P. Period (days)'] = + d['P. Period (days)']
-        d['S. Mass (SU)'] = + d['S. Mass (SU)']
-        d['S. Radius (SU)'] = + d['S. Radius (SU)']
-        d['Norm Distance'] = + d['Norm Distance']
-        d.phi0 = 190
-        if (d['P. Ts Mean (K)'] > t_max2) {
-            t_max2 = d['P. Ts Mean (K)'];
-        }
-        if (d['P. Ts Mean (K)'] < t_min2) {
-            t_min2 = d['P. Ts Mean (K)'];
-        }
-    });
+// d3.csv("planets.csv",function(error, data2) {
+//     if (error) throw error;
+//     var t_min2 = Infinity;
+//     var t_max2 = 0;
+//     data2.forEach(function(d){
+//         d['P. Mass (EU)'] = + d['P. Mass (EU)']
+//         d['P. Gravity (EU)'] = + d['P. Gravity (EU)']
+//         d['P. Disc. Year'] = + d['P. Disc. Year']
+//         d['P. Habitable'] = + d['P. Habitable']
+//         d['P. Radius (EU)'] = + d['P. Radius (EU)']
+//         d['P. Ts Mean (K)'] = + d['P. Ts Mean (K)']
+//         d['P. Mean Distance (AU)'] = + d['P. Mean Distance (AU)']
+//         d['P. Period (days)'] = + d['P. Period (days)']
+//         d['S. Mass (SU)'] = + d['S. Mass (SU)']
+//         d['S. Radius (SU)'] = + d['S. Radius (SU)']
+//         d['Norm Distance'] = + d['Norm Distance']
+//         d.phi0 = 190
+//         if (d['P. Ts Mean (K)'] > t_max2) {
+//             t_max2 = d['P. Ts Mean (K)'];
+//         }
+//         if (d['P. Ts Mean (K)'] < t_min2) {
+//             t_min2 = d['P. Ts Mean (K)'];
+//         }
+//     });
 
-    d3.csv("planets2.csv",function(error, data3) {
-        if (error) throw error;
-        var t_min3 = Infinity;
-        var t_max3 = 0;
-        data3.forEach(function(d){
-            d['P. Mass (EU)'] = + d['P. Mass (EU)']
-            d['P. Gravity (EU)'] = + d['P. Gravity (EU)']
-            d['P. Disc. Year'] = + d['P. Disc. Year']
-            d['P. Habitable'] = + d['P. Habitable']
-            d['P. Radius (EU)'] = + d['P. Radius (EU)']
-            d['P. Ts Mean (K)'] = + d['P. Ts Mean (K)']
-            d['P. Mean Distance (AU)'] = + d['P. Mean Distance (AU)']
-            d['P. Period (days)'] = + d['P. Period (days)']
-            d['S. Mass (SU)'] = + d['S. Mass (SU)']
-            d['S. Radius (SU)'] = + d['S. Radius (SU)']
-            d['Norm Distance'] = + d['Norm Distance']
+//     d3.csv("planets2.csv",function(error, data3) {
+//         if (error) throw error;
+//         var t_min3 = Infinity;
+//         var t_max3 = 0;
+//         data3.forEach(function(d){
+//             d['P. Mass (EU)'] = + d['P. Mass (EU)']
+//             d['P. Gravity (EU)'] = + d['P. Gravity (EU)']
+//             d['P. Disc. Year'] = + d['P. Disc. Year']
+//             d['P. Habitable'] = + d['P. Habitable']
+//             d['P. Radius (EU)'] = + d['P. Radius (EU)']
+//             d['P. Ts Mean (K)'] = + d['P. Ts Mean (K)']
+//             d['P. Mean Distance (AU)'] = + d['P. Mean Distance (AU)']
+//             d['P. Period (days)'] = + d['P. Period (days)']
+//             d['S. Mass (SU)'] = + d['S. Mass (SU)']
+//             d['S. Radius (SU)'] = + d['S. Radius (SU)']
+//             d['Norm Distance'] = + d['Norm Distance']
 
-            d.phi0 = 190
-            if (d['P. Ts Mean (K)'] > t_max3) {
-                t_max3 = d['P. Ts Mean (K)'];
-            }
-            if (d['P. Ts Mean (K)'] < t_min3) {
-                t_min3 = d['P. Ts Mean (K)'];
-            }
-        });
+//             d.phi0 = 190
+//             if (d['P. Ts Mean (K)'] > t_max3) {
+//                 t_max3 = d['P. Ts Mean (K)'];
+//             }
+//             if (d['P. Ts Mean (K)'] < t_min3) {
+//                 t_min3 = d['P. Ts Mean (K)'];
+//             }
+//         });
 
 
 d3.csv("habit_planets.csv",function(error, data) {
@@ -188,6 +188,7 @@ function select_planets(h) {
     case 5:
         container.selectAll("g.planet").attr("opacity",0)
         container.selectAll("g.planet").filter(function(d, i) { return (d['P. Name']=="KOI-701.03")}).attr("opacity",1);
+        // container.selectAll("g.planet").filter(function(d, i) { return (d['P. Name']=="KOI-701.03")}).select("circle.orbit").attr("opacity",1);
         break;
     default:
     }
@@ -231,6 +232,9 @@ svg.append("svg:image")
 sun_global_img = svg.select("#sun");
 
 svg.append("g").append("circle").attr("cx", w/2).attr("cy", h/2).attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
+
+
+
 
 // svg.append("g").append("rect").attr("x",5).attr("y",10).attr("stroke","#ffffff").style("fill","none")
 //     .attr("width","300").attr("height",100);
@@ -356,9 +360,9 @@ function change_dataset(use_dataset) {
         .attr("class", "planet").each(function(d, i) {
         d3.select(this).append("circle").attr("r", d['P. Radius (EU)']*5).attr("cx",(0.05+d['Norm Distance'])*h/2)
             .attr("cy", 0).attr("class", "planet").style("fill", (calculateColor(d['P. Ts Mean (K)'], use_min, use_max)))
+        // d3.select(this).append("circle").attr("class","orbit").attr("r",(0.05+d['Norm Distance'])*h/2).attr("fill","none").attr("stroke","#ffffff").attr("opacity",0);
     });
 
-    // d3.select("g.planet").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
     // sun_global_img.append("g").append("circle").attr("class","orbit").attr("r",(0.05+0.735)*h/2).attr("fill","none").attr("stroke","#ffffff");
 }
 
@@ -430,4 +434,4 @@ else {
 
 
 
-})})});
+});//})});
