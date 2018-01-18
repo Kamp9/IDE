@@ -101,7 +101,7 @@ d3.csv("habit_planets.csv",function(error, data) {
         t_min = d['P. Ts Mean (K)'];
     }
   });
-
+console.log(data);
 
 // Create Slider
 var svgslider = d3.select("#svgslider"),
@@ -146,6 +146,15 @@ var handle = slider.insert("circle", ".track-overlay")
     .attr("cx",x(100));
 
 
+d3.select("#but3").on('click',function(d){
+            select_planets(3);
+        })
+
+
+d3.select("#butdat").on('click',function(d){
+            change_dataset(2);
+        })
+
 
 function select_planets(h) {
     num_planets = Math.floor(h);
@@ -161,7 +170,11 @@ function select_planets(h) {
     case 2:
         container.selectAll("g.planet").filter(function(d, i) { return (d['P. Ts Mean (K)']-t_min) / (t_max-t_min) < h/100}).attr("opacity",1)
         container.selectAll("g.planet").filter(function(d, i) { return (d['P. Ts Mean (K)']-t_min) / (t_max-t_min) > h/100}).attr("opacity",0)
-        break;    
+        break;
+    case 3:
+        container.selectAll("g.planet").attr("opacity",0)
+        break;
+        // container.selectAll("g.planet").filter(function(d, i) { return (d['P. Name']=="KOI-571.05"}).attr("opacity",0);
     default:
     }
 
@@ -372,6 +385,7 @@ var sse50 = function () {
             if (hasEnd) l--;
             for (i = 0; i < l; i++) {
                 a[i].onmouseover = function () {
+                    console.log("ARGGG");
                     for (j = 0; j < l; j++) {
                         a[j].className = '';
                     }
