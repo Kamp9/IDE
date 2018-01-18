@@ -169,10 +169,13 @@ d3.select("#butdat").on('click',function(d){
             change_dataset(2);
         })
 
-
+var old_slide = 0;
 function select_planets(h) {
     if(h>0){
         num_planets = Math.floor(h);
+    }
+    if(old_slide == 5 || old_slide == 4 || old_slide ==3){
+        num_planets = 100;
     }
     switch(slider_mode) {
     case 0:
@@ -203,6 +206,7 @@ function select_planets(h) {
         break;
     default:
     }
+    old_slide = slider_mode;
 
 
     handle.attr("cx", x(h));
