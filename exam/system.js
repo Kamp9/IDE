@@ -149,6 +149,12 @@ var handle = slider.insert("circle", ".track-overlay")
 d3.select("#but3").on('click',function(d){
             select_planets(3);
         })
+d3.select("#but4").on('click',function(d){
+            select_planets(4);
+        })
+d3.select("#but5").on('click',function(d){
+            select_planets(5);
+        })
 
 
 d3.select("#butdat").on('click',function(d){
@@ -173,8 +179,16 @@ function select_planets(h) {
         break;
     case 3:
         container.selectAll("g.planet").attr("opacity",0)
+        container.selectAll("g.planet").filter(function(d, i) { return (d['P. Name']=="KOI-571.05")}).attr("opacity",1);
         break;
-        // container.selectAll("g.planet").filter(function(d, i) { return (d['P. Name']=="KOI-571.05"}).attr("opacity",0);
+    case 4:
+        container.selectAll("g.planet").attr("opacity",0)
+        container.selectAll("g.planet").filter(function(d, i) { return (d['P. Name']=="KOI-87.01")}).attr("opacity",1);
+        break;    
+    case 5:
+        container.selectAll("g.planet").attr("opacity",0)
+        container.selectAll("g.planet").filter(function(d, i) { return (d['P. Name']=="KOI-701.03")}).attr("opacity",1);
+        break;
     default:
     }
 
