@@ -305,7 +305,8 @@ html { font-size: 62.5%; }
 
 body {
     font-size: 1.4rem;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', light;
+    /*font-family: 'Open Sans', sans-serif;*/
     font-weight: 300;
     fill: #7A7A7A;
     text-align: center;
