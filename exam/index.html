@@ -66,7 +66,11 @@
             JavaScript, with the D3 library, which performs the extraction and visualization of the data. Larger number
             of both parameters and planets could be used. However, in order to keep information interpretable for the
             user, along with not overfilling the visualization with redundant information, both the planets and
-            parameters have been limited.
+            parameters have been limited. The full dataset contains 68 features for each planet. In the preprocessing
+            step we extract 10 of these in order to make the visualization, along with creating new values based on
+            normalization. These normalized values are used to fit all data points into the visualization relative to
+            each other.
+
             </p>
             <p>
             <h3>Visualization Overview</h3>
@@ -143,7 +147,7 @@
                     <div class="item active">
                         <img src="images/lava.jpg" alt="Lava" style="width:100%;">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Kepler-10b</h5>
+                            <h5>Kepler-10 b / KOI-72.01</h5>
                             <p>Kepler's first rocky planet discovery is a scorched, Earth-size world that scientists
                                 believe may have a lava ocean on its surface.</p>
                         </div>
@@ -171,7 +175,7 @@
                     <div class="item">
                         <img src="images/kepler62b.jpg" alt="water" style="width:100%;">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Kepler-62b b/ KOI-701.04) </h5>
+                            <h5>Kepler-62b b/ KOI-701.04 </h5>
                             <p>Kepler 62b is a super-Earth exoplanet orbiting within the habitable zone of the star
                                 Kepler-62, the outermost of five such planets discovered by NASA's Kepler spacecraft. It
                                 is located about 1,200 light-years from Earth in the constellation of Lyra</p>
